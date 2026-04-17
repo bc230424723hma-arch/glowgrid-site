@@ -1,0 +1,2895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GlowGrid Technologies | Pakistan's Most Trusted Solar Energy Provider</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+<style>
+/* ==========================================================================
+   DESIGN SYSTEM — GlowGrid Technologies
+   ========================================================================== */
+:root {
+  --primary: #0C3B7D;
+  --primary-light: #164fa8;
+  --primary-dark: #082c5e;
+  --accent: #00C650;
+  --accent-hover: #00a843;
+  --accent-light: rgba(0,198,80,0.10);
+  --accent-glow: rgba(0,198,80,0.3);
+
+  --bg-main: #ffffff;
+  --bg-off: #f4f8ff;
+  --bg-dark: #071e40;
+  --bg-glass: rgba(255,255,255,0.92);
+
+  --text-main: #0C3B7D;
+  --text-body: #1a2e4a;
+  --text-muted: #5a7aa0;
+
+  --border-light: rgba(12,59,125,0.10);
+  --border-accent: rgba(0,198,80,0.25);
+  --shadow-soft: 0 10px 40px -10px rgba(12,59,125,0.08);
+  --shadow-hover: 0 24px 50px -10px rgba(0,198,80,0.22);
+  --shadow-blue: 0 24px 50px -10px rgba(12,59,125,0.2);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-main);
+  color: var(--text-body);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  cursor: none;
+}
+
+/* ==========================================================================
+   CUSTOM CURSOR
+   ========================================================================== */
+.cursor-dot {
+  width: 7px; height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+  position: fixed; top:0; left:0;
+  pointer-events: none; z-index: 99999;
+  transition: transform 0.1s ease;
+  box-shadow: 0 0 12px var(--accent), 0 0 24px rgba(0,198,80,0.5);
+}
+.cursor-ring {
+  width: 34px; height: 34px;
+  border: 1.5px solid rgba(0,198,80,0.5);
+  border-radius: 50%;
+  position: fixed; top:0; left:0;
+  pointer-events: none; z-index: 99998;
+  transition: all 0.12s ease;
+}
+.cursor-dot.hover { transform: scale(2.5); }
+.cursor-ring.hover { transform: scale(1.6); border-color: rgba(0,198,80,0.9); }
+
+/* ==========================================================================
+   SOLAR CANVAS BACKGROUND
+   ========================================================================== */
+#solarCanvas {
+  position: fixed; inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* ==========================================================================
+   NAVBAR
+   ========================================================================== */
+.navbar-glow {
+  position: fixed; top:0; left:0; right:0;
+  z-index: 1000;
+  padding: 18px 5%;
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-light);
+  transition: all 0.3s ease;
+}
+.navbar-glow.scrolled {
+  padding: 10px 5%;
+  box-shadow: 0 4px 30px rgba(12,59,125,0.10);
+  border-bottom-color: var(--border-accent);
+}
+
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; color: var(--primary);
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 1.35rem; letter-spacing: -0.03em;
+}
+.nav-logo-icon {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; color: white;
+  box-shadow: 0 4px 15px rgba(12,59,125,0.35);
+  animation: sunPulse 3s ease-in-out infinite;
+}
+@keyframes sunPulse {
+  0%,100% { box-shadow: 0 4px 15px rgba(12,59,125,0.35); }
+  50% { box-shadow: 0 4px 30px rgba(0,198,80,0.5), 0 0 60px rgba(0,198,80,0.15); }
+}
+
+.nav-links { display: none; gap: 32px; list-style: none; margin:0; align-items: center; }
+@media(min-width:992px) { .nav-links { display: flex; } }
+.nav-links a {
+  text-decoration: none; color: var(--text-muted);
+  font-weight: 600; font-size: 0.88rem; letter-spacing: 0.01em;
+  position: relative; transition: color 0.3s; cursor: none;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent), #00e85a);
+  transition: width 0.3s; border-radius: 2px;
+}
+.nav-links a:hover { color: var(--primary); }
+.nav-links a:hover::after { width: 100%; }
+
+.btn-premium {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: white;
+  padding: 11px 26px; border-radius: 8px;
+  font-weight: 700; font-size: 0.88rem;
+  text-decoration: none; border: none;
+  transition: all 0.35s;
+  display: inline-flex; align-items: center; gap: 8px;
+  position: relative; overflow: hidden; cursor: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.btn-premium::before {
+  content: '';
+  position: absolute; top:0; left:-100%; width:100%; height:100%;
+  background: linear-gradient(90deg, transparent, rgba(0,198,80,0.25), transparent);
+  transition: left 0.5s;
+}
+.btn-premium:hover::before { left: 100%; }
+.btn-premium:hover {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  color: white;
+  transform: translateY(-2px); box-shadow: var(--shadow-blue);
+}
+.btn-accent {
+  background: var(--accent);
+  color: white;
+  padding: 11px 26px; border-radius: 8px;
+  font-weight: 700; font-size: 0.88rem;
+  text-decoration: none; border: none;
+  transition: all 0.35s;
+  display: inline-flex; align-items: center; gap: 8px;
+  position: relative; overflow: hidden; cursor: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.btn-accent:hover {
+  background: var(--accent-hover);
+  color: white;
+  transform: translateY(-2px); box-shadow: var(--shadow-hover);
+}
+.btn-outline-premium {
+  background: transparent; color: var(--primary);
+  border: 1.5px solid var(--border-light);
+  padding: 11px 26px; border-radius: 8px;
+  font-weight: 600; font-size: 0.88rem;
+  text-decoration: none; transition: all 0.3s; cursor: none;
+}
+.btn-outline-premium:hover {
+  border-color: var(--accent); color: var(--accent-hover);
+  background: var(--accent-light); transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 120px 0 80px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #e8f0fd 0%, #f4f8ff 40%, #ffffff 100%);
+  z-index: 2;
+}
+
+.hero-geo {
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+}
+.geo-ring {
+  position: absolute; border-radius: 50%;
+  border: 1px solid rgba(12,59,125,0.08);
+  animation: geoExpand 6s ease-out infinite;
+}
+.geo-ring:nth-child(1) { width: 300px; height: 300px; top: 10%; right: 10%; animation-delay: 0s; }
+.geo-ring:nth-child(2) { width: 500px; height: 500px; top: -5%; right: 5%; animation-delay: 1s; }
+.geo-ring:nth-child(3) { width: 700px; height: 700px; top: -15%; right: 0%; animation-delay: 2s; }
+.geo-ring:nth-child(4) { width: 900px; height: 900px; top: -25%; right: -5%; animation-delay: 3s; }
+@keyframes geoExpand {
+  0%,100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.04); }
+}
+
+.sun-burst {
+  position: absolute; right: 8%; top: 50%; transform: translateY(-50%);
+  width: 420px; height: 420px;
+  pointer-events: none;
+}
+.sun-core {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px; height: 100px;
+  background: radial-gradient(circle, #00e85a, #00C650);
+  border-radius: 50%;
+  box-shadow: 0 0 60px rgba(0,198,80,0.6), 0 0 120px rgba(0,198,80,0.3);
+  animation: sunCorePulse 3s ease-in-out infinite;
+}
+@keyframes sunCorePulse {
+  0%,100% { box-shadow: 0 0 60px rgba(0,198,80,0.6), 0 0 120px rgba(0,198,80,0.3); }
+  50% { box-shadow: 0 0 80px rgba(0,198,80,0.9), 0 0 160px rgba(0,198,80,0.5); }
+}
+.sun-ray {
+  position: absolute; top: 50%; left: 50%;
+  width: 3px; border-radius: 2px;
+  background: linear-gradient(180deg, rgba(0,198,80,0.8), transparent);
+  transform-origin: bottom center;
+  animation: rayRotate 12s linear infinite;
+}
+@keyframes rayRotate { from { transform: rotate(0deg) translateY(-60%) scaleY(1); } to { transform: rotate(360deg) translateY(-60%) scaleY(1); } }
+.sun-halo {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  border-radius: 50%; border: 1px solid rgba(0,198,80,0.2);
+  animation: haloBreath 4s ease-in-out infinite;
+}
+@keyframes haloBreath {
+  0%,100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.06); }
+}
+
+.hero-panel-container {
+  position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+  width: 45%; max-width: 560px;
+  animation: panelFloat 6s ease-in-out infinite;
+}
+@keyframes panelFloat {
+  0%,100% { transform: translateY(-50%) translateX(0); }
+  50% { transform: translateY(-52%) translateX(-8px); }
+}
+
+.hero-content { position: relative; z-index: 3; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(0,198,80,0.1);
+  border: 1px solid rgba(0,198,80,0.3);
+  color: var(--accent-hover);
+  padding: 7px 18px; border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em;
+  text-transform: uppercase; margin-bottom: 28px;
+  animation: fadeUp 0.8s ease both;
+}
+.badge-pulse {
+  width: 6px; height: 6px; background: var(--accent);
+  border-radius: 50%;
+  animation: badgeBlink 1.5s step-end infinite;
+  box-shadow: 0 0 6px var(--accent);
+}
+@keyframes badgeBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+  line-height: 1.08; margin-bottom: 24px;
+  font-weight: 800; letter-spacing: -0.03em;
+  color: var(--primary);
+  animation: fadeUp 0.8s ease 0.1s both;
+}
+.hero h1 .accent-word {
+  background: linear-gradient(135deg, var(--accent), #00e85a 50%, var(--accent-hover));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200%;
+  animation: textGradient 4s ease infinite, fadeUp 0.8s ease 0.2s both;
+}
+@keyframes textGradient {
+  0%,100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.hero p {
+  font-size: 1.08rem; color: var(--text-muted);
+  line-height: 1.75; margin-bottom: 40px; max-width: 580px;
+  font-weight: 400;
+  animation: fadeUp 0.8s ease 0.25s both;
+}
+
+.hero-actions { animation: fadeUp 0.8s ease 0.35s both; }
+
+.hero-stats {
+  display: flex; gap: 44px;
+  margin-top: 60px; padding-top: 40px;
+  border-top: 1px solid var(--border-light);
+  animation: fadeUp 0.8s ease 0.45s both;
+}
+.stat-box h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.2rem; color: var(--primary);
+  margin-bottom: 4px; font-weight: 800; letter-spacing: -0.03em;
+}
+.stat-box h3 span { color: var(--accent); }
+.stat-box p {
+  font-size: 0.78rem; color: var(--text-muted);
+  text-transform: uppercase; font-weight: 700;
+  letter-spacing: 0.08em; margin: 0;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ==========================================================================
+   FLOATING PARTICLES
+   ========================================================================== */
+.particles-hero {
+  position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+}
+.p-dot {
+  position: absolute;
+  border-radius: 50%;
+  animation: particleRise linear infinite;
+  opacity: 0;
+}
+@keyframes particleRise {
+  0% { transform: translateY(100%) translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 0.7; }
+  100% { transform: translateY(-80px) translateX(calc(var(--drift,0) * 1px)); opacity: 0; }
+}
+
+/* ==========================================================================
+   SECTION SHARED
+   ========================================================================== */
+.section-padding { padding: 110px 0; }
+
+.section-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem; color: var(--accent-hover);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.section-label::before { content: '//'; color: var(--accent); font-weight: 700; }
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  margin-bottom: 16px; font-weight: 800; letter-spacing: -0.03em;
+  color: var(--primary);
+}
+.section-subtitle {
+  color: var(--text-muted); font-size: 1.05rem;
+  max-width: 560px; margin: 0 auto 64px; line-height: 1.75;
+}
+
+/* ==========================================================================
+   ABOUT US SECTION
+   ========================================================================== */
+.about-section {
+  background: var(--bg-main);
+  position: relative; overflow: hidden;
+}
+.about-section::before {
+  content: '';
+  position: absolute; top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0,198,80,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.about-img-wrap {
+  position: relative;
+}
+.about-img-card {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  border-radius: 24px;
+  padding: 50px 40px;
+  color: white;
+  position: relative; overflow: hidden;
+  min-height: 420px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.about-img-card::before {
+  content: '';
+  position: absolute; top: -80px; right: -80px;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(0,198,80,0.2) 0%, transparent 70%);
+}
+.about-img-card .big-icon {
+  position: absolute; top: 40px; right: 40px;
+  font-size: 6rem; color: rgba(255,255,255,0.08);
+}
+.about-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(0,198,80,0.2);
+  border: 1px solid rgba(0,198,80,0.4);
+  color: #4dff8e;
+  padding: 6px 16px; border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em;
+  text-transform: uppercase; margin-bottom: 16px;
+}
+.about-img-card h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.8rem; font-weight: 800; margin-bottom: 10px;
+}
+.about-img-card p { color: rgba(255,255,255,0.7); font-size: 0.9rem; margin: 0; }
+
+.about-float-stat {
+  position: absolute; bottom: -20px; left: -20px;
+  background: white;
+  border-radius: 16px;
+  padding: 18px 24px;
+  box-shadow: 0 20px 50px rgba(12,59,125,0.15);
+  display: flex; align-items: center; gap: 14px;
+}
+.about-float-stat .stat-icon {
+  width: 44px; height: 44px;
+  background: var(--accent-light);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent); font-size: 1.1rem;
+}
+.about-float-stat strong {
+  display: block; font-family: 'Syne', sans-serif;
+  font-size: 1.3rem; font-weight: 800; color: var(--primary);
+}
+.about-float-stat span { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
+
+.why-item {
+  display: flex; gap: 16px; align-items: flex-start; margin-bottom: 24px;
+}
+.why-icon {
+  width: 46px; height: 46px; flex-shrink: 0;
+  background: var(--accent-light);
+  border: 1px solid var(--border-accent);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent); font-size: 1rem;
+  transition: all 0.3s;
+}
+.why-item:hover .why-icon {
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 8px 25px rgba(0,198,80,0.35);
+}
+.why-item h5 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem; font-weight: 700; color: var(--primary);
+  margin-bottom: 4px;
+}
+.why-item p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin: 0; }
+
+/* ==========================================================================
+   SERVICES
+   ========================================================================== */
+.services-section { background: var(--bg-off); position: relative; overflow: hidden; }
+
+.services-section::before {
+  content: '';
+  position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 400px;
+  background: radial-gradient(ellipse, rgba(0,198,80,0.05) 0%, transparent 70%);
+  pointer-events: none;
+  animation: shimmerDrift 8s ease-in-out infinite;
+}
+@keyframes shimmerDrift {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(40px); }
+}
+
+.service-card {
+  background: var(--bg-main);
+  border: 1px solid var(--border-light);
+  border-radius: 18px;
+  padding: 42px 32px;
+  height: 100%;
+  transition: all 0.45s cubic-bezier(0.16,1,0.3,1);
+  box-shadow: var(--shadow-soft);
+  position: relative; overflow: hidden; cursor: none;
+}
+.service-card::before {
+  content: '';
+  position: absolute; top:0; left:0; right:0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), #00e85a);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.service-card:hover::before { transform: scaleX(1); }
+.service-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(0,198,80,0.04) 0%, transparent 60%);
+  opacity: 0; transition: opacity 0.4s;
+}
+.service-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-hover);
+}
+.service-card:hover::after { opacity: 1; }
+
+.service-card.placeholder-card {
+  opacity: 0.65;
+  border-style: dashed;
+}
+.service-card.placeholder-card:hover { opacity: 1; }
+
+.service-icon {
+  width: 58px; height: 58px;
+  background: var(--accent-light);
+  border: 1px solid var(--border-accent);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; color: var(--accent);
+  margin-bottom: 24px;
+  transition: all 0.3s;
+}
+.service-card:hover .service-icon {
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 8px 30px rgba(0,198,80,0.4);
+  border-color: var(--accent);
+  transform: rotate(-5deg) scale(1.1);
+}
+.service-card h4 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.2rem; margin-bottom: 12px; font-weight: 700; color: var(--primary);
+}
+.service-card p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.65; margin-bottom: 0; }
+.coming-soon-tag {
+  display: inline-block;
+  background: rgba(12,59,125,0.08);
+  color: var(--primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 100px;
+  margin-top: 14px;
+}
+
+/* ==========================================================================
+   PROCESS SCROLL SECTION (DARK)
+   ========================================================================== */
+.solar-process-section {
+  background: var(--bg-dark);
+  position: relative; z-index: 2;
+}
+.solar-track { height: 400vh; position: relative; }
+.solar-sticky {
+  position: sticky; top: 0;
+  height: 100vh;
+  display: flex; align-items: center;
+  padding: 80px 0;
+}
+.process-text-container { position: relative; height: 240px; }
+.process-step {
+  position: absolute; inset: 0;
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.process-step.active { opacity: 1; transform: translateY(0); }
+.step-num {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--accent); font-weight: 600; font-size: 0.78rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  margin-bottom: 14px; display: block;
+}
+.process-step h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  color: white; margin-bottom: 16px; font-weight: 800;
+}
+.process-step p { color: #94a3b8; font-size: 1.05rem; line-height: 1.7; max-width: 400px; }
+
+.step-dots { display: flex; gap: 10px; margin-top: 36px; }
+.step-dot {
+  width: 8px; height: 8px; border-radius: 100px;
+  background: rgba(255,255,255,0.15);
+  transition: all 0.4s;
+}
+.step-dot.active {
+  background: var(--accent);
+  width: 28px;
+  box-shadow: 0 0 12px rgba(0,198,80,0.6);
+}
+
+.process-visual-container {
+  position: relative; width: 100%; height: 420px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.process-visual-container::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(0,198,80,0.04), transparent 70%);
+}
+.solar-svg {
+  position: absolute; width: 82%; height: 82%;
+  opacity: 0; transform: scale(0.92) translateY(10px);
+  transition: all 0.65s cubic-bezier(0.16,1,0.3,1);
+}
+.solar-svg.active { opacity: 1; transform: scale(1) translateY(0); }
+
+/* ==========================================================================
+   STATS BAND
+   ========================================================================== */
+.stats-band {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  padding: 80px 0;
+  position: relative; overflow: hidden; z-index: 2;
+}
+.stats-band::before {
+  content: '';
+  position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 300px;
+  background: radial-gradient(ellipse, rgba(0,198,80,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.stats-band-item {
+  text-align: center; padding: 20px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+.stats-band-item:last-child { border-right: none; }
+.stats-band-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 3rem; font-weight: 800;
+  background: linear-gradient(135deg, #00e85a, var(--accent));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; letter-spacing: -0.03em;
+  line-height: 1; margin-bottom: 8px;
+}
+.stats-band-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem; color: #6a8faf;
+  text-transform: uppercase; letter-spacing: 0.14em;
+}
+
+/* ==========================================================================
+   BLOG / ARTICLES
+   ========================================================================== */
+.blog-section { background: var(--bg-off); position: relative; overflow: hidden; }
+
+.blog-card {
+  background: var(--bg-main);
+  border: 1px solid var(--border-light);
+  border-radius: 18px;
+  overflow: hidden;
+  height: 100%;
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+  box-shadow: var(--shadow-soft);
+  cursor: none;
+}
+.blog-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-hover);
+}
+
+.blog-thumb {
+  height: 200px;
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.blog-thumb-inner {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 5rem; opacity: 0.12;
+  transition: transform 0.4s ease;
+}
+.blog-card:hover .blog-thumb-inner { transform: scale(1.12); }
+
+.blog-category {
+  position: absolute; top: 16px; left: 16px;
+  background: var(--accent);
+  color: white;
+  padding: 4px 12px; border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+
+.blog-body { padding: 28px; }
+.blog-meta {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.78rem; color: var(--text-muted);
+  margin-bottom: 12px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.blog-meta span { display: flex; align-items: center; gap: 5px; }
+.blog-card h5 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.1rem; font-weight: 700; color: var(--primary);
+  margin-bottom: 10px; line-height: 1.4;
+}
+.blog-card p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.65; margin-bottom: 20px; }
+.blog-read-more {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--accent); font-weight: 700; font-size: 0.85rem;
+  text-decoration: none; transition: gap 0.3s;
+  cursor: none;
+}
+.blog-card:hover .blog-read-more { gap: 10px; }
+
+/* ==========================================================================
+   CTA SECTION
+   ========================================================================== */
+.cta-section {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  padding: 100px 0;
+  position: relative; overflow: hidden; z-index: 2;
+}
+.cta-section::before {
+  content: '';
+  position: absolute; top: -200px; right: -200px;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(0,198,80,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-section::after {
+  content: '';
+  position: absolute; bottom: -200px; left: -200px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(0,198,80,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-section h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: white; font-weight: 800; letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+.cta-section p { color: rgba(255,255,255,0.7); font-size: 1.05rem; max-width: 560px; margin: 0 auto 40px; }
+.cta-feature {
+  display: flex; align-items: center; gap: 10px;
+  color: rgba(255,255,255,0.8); font-size: 0.88rem;
+  margin-bottom: 12px;
+}
+.cta-feature i { color: var(--accent); }
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.footer {
+  background: var(--bg-dark);
+  padding: 80px 0 40px;
+  position: relative; z-index: 2;
+}
+.footer-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.5rem; font-weight: 800; color: white;
+  text-decoration: none; display: flex; align-items: center;
+  gap: 10px; margin-bottom: 18px; cursor: none;
+}
+.footer-logo-icon {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, var(--accent), #00e85a);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem; color: white;
+}
+.footer p { color: #4a6a8a; font-size: 0.9rem; line-height: 1.7; max-width: 280px; }
+.footer-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.88rem; font-weight: 700; color: white;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 22px;
+}
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 10px; }
+.footer-links a {
+  color: #4a6a8a; text-decoration: none; font-size: 0.9rem;
+  transition: all 0.3s; display: flex; align-items: center; gap: 8px; cursor: none;
+}
+.footer-links a:hover { color: var(--accent); padding-left: 4px; }
+.footer-links a i { width: 16px; color: var(--accent); }
+
+.footer-divider { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 50px 0 28px; }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  color: #4a6a8a; font-size: 0.82rem;
+}
+.footer-socials { display: flex; gap: 10px; }
+.social-btn {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: #4a6a8a; text-decoration: none; font-size: 0.85rem;
+  transition: all 0.3s; cursor: none;
+}
+.social-btn:hover {
+  border-color: var(--accent); color: var(--accent);
+  background: rgba(0,198,80,0.1); transform: translateY(-3px);
+}
+
+/* ==========================================================================
+   SCROLL REVEAL
+   ========================================================================== */
+.reveal {
+  opacity: 0; transform: translateY(36px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   SCROLLBAR
+   ========================================================================== */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--accent), var(--accent-hover));
+  border-radius: 3px;
+}
+
+/* Responsive */
+@media(max-width:991px) {
+  .hero-panel-container { display: none; }
+  .sun-burst { display: none; }
+  .stats-band-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .footer-bottom { flex-direction: column; gap: 16px; }
+  .hero-stats { gap: 24px; }
+  .about-float-stat { position: static; margin-top: 20px; }
+}
+
+/* ==========================================================================
+   SOLAR SAVINGS CALCULATOR
+   ========================================================================== */
+.calculator-section {
+  background: linear-gradient(160deg, var(--bg-dark) 0%, #0a2340 60%, #071a32 100%);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+.calculator-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(0,198,80,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.calc-tabs {
+  display: flex;
+  gap: 0;
+  background: rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 5px;
+  margin-bottom: 30px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.calc-tab {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,0.55);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.calc-tab.active {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0,198,80,0.35);
+}
+.calc-tab:hover:not(.active) { color: rgba(255,255,255,0.85); }
+.calc-panel { display: none; }
+.calc-panel.active { display: block; }
+.calc-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+@media(max-width:600px) { .calc-form-grid { grid-template-columns: 1fr; } }
+.calc-label {
+  display: block;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.calc-input, .calc-select {
+  width: 100%;
+  padding: 13px 16px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 10px;
+  color: #fff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.3s;
+}
+.calc-input:focus, .calc-select:focus {
+  border-color: var(--accent);
+  background: rgba(0,198,80,0.07);
+  box-shadow: 0 0 0 3px rgba(0,198,80,0.12);
+}
+.calc-input::placeholder { color: rgba(255,255,255,0.3); }
+.calc-select option { background: #0a2340; color: #fff; }
+.calc-btn-submit {
+  width: 100%;
+  margin-top: 22px;
+  padding: 15px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  box-shadow: 0 8px 28px rgba(0,198,80,0.3);
+}
+.calc-btn-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(0,198,80,0.45); }
+.calc-result-card {
+  margin-top: 28px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(0,198,80,0.25);
+  border-radius: 16px;
+  padding: 28px;
+  display: none;
+}
+.calc-result-card.show { display: block; animation: fadeUp 0.5s ease; }
+.calc-result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media(max-width:500px) { .calc-result-grid { grid-template-columns: 1fr; } }
+.calc-result-item {
+  background: rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+.calc-result-item .val {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--accent);
+  display: block;
+}
+.calc-result-item .lbl {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.55);
+  margin-top: 4px;
+  display: block;
+}
+.calc-result-highlight {
+  background: linear-gradient(135deg, rgba(0,198,80,0.18), rgba(0,198,80,0.06));
+  border: 1px solid rgba(0,198,80,0.35);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin-top: 18px;
+  text-align: center;
+}
+.calc-result-highlight .big-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--accent);
+}
+.calc-result-highlight .big-lbl {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.88rem;
+  margin-top: 4px;
+}
+.calc-info-box {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 32px;
+  height: 100%;
+}
+.calc-info-box h4 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  color: #fff;
+  font-size: 1.35rem;
+  margin-bottom: 18px;
+}
+.calc-feature-row {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.calc-feature-row:last-child { border-bottom: none; }
+.calc-feature-row .icon {
+  width: 38px; height: 38px;
+  background: rgba(0,198,80,0.12);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+.calc-feature-row .text h6 { color: #fff; font-size: 0.9rem; font-weight: 600; margin-bottom: 2px; }
+.calc-feature-row .text p { color: rgba(255,255,255,0.5); font-size: 0.8rem; margin: 0; }
+
+/* ==========================================================================
+   PORTFOLIO SECTION
+   ========================================================================== */
+.portfolio-section {
+  background: var(--bg-off);
+  padding: 100px 0;
+}
+.portfolio-filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 42px;
+}
+.pf-btn {
+  padding: 9px 20px;
+  border: 1.5px solid var(--border-light);
+  border-radius: 100px;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.pf-btn.active, .pf-btn:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media(max-width:991px) { .portfolio-grid { grid-template-columns: repeat(2,1fr); } }
+@media(max-width:600px) { .portfolio-grid { grid-template-columns: 1fr; } }
+.portfolio-card {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+}
+.portfolio-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(0,198,80,0.3);
+}
+.portfolio-thumb {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+.portfolio-thumb-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+}
+.portfolio-card:hover .portfolio-thumb-bg { transform: scale(1.05); }
+.portfolio-thumb-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 30%, rgba(12,59,125,0.7));
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 16px;
+}
+.portfolio-card:hover .portfolio-thumb-overlay { opacity: 1; }
+.portfolio-view-btn {
+  width: 40px; height: 40px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  font-size: 0.9rem;
+  transform: translateY(10px);
+  transition: transform 0.3s;
+}
+.portfolio-card:hover .portfolio-view-btn { transform: translateY(0); }
+.portfolio-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 100px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.portfolio-badge.hybrid { background: #7c3aed; }
+.portfolio-badge.commercial { background: #b45309; }
+.portfolio-badge.government { background: #0f766e; }
+.portfolio-body {
+  padding: 20px 22px 22px;
+}
+.portfolio-body h5 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 1rem;
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+.portfolio-body p {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+.portfolio-specs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.spec-tag {
+  padding: 4px 10px;
+  background: var(--bg-off);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   PROJECT GALLERY IN OVERLAY (NEW)
+   ========================================================================== */
+.project-gallery {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 10px;
+  margin: 14px 0 20px;
+}
+.project-gallery img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--border-light);
+}
+@media(max-width:700px){
+  .project-gallery { grid-template-columns: 1fr; }
+  .project-gallery img { height: 220px; }
+}
+
+/* ==========================================================================
+   PAGE OVERLAY (Project Detail & Blog Post)
+   ========================================================================== */
+.page-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 30px 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.page-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.page-overlay-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(7,30,64,0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 0;
+}
+.page-overlay-content {
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  border-radius: 24px;
+  max-width: 900px;
+  width: 100%;
+  overflow: hidden;
+  transform: translateY(30px);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 40px 120px rgba(0,0,0,0.5);
+}
+.page-overlay.open .page-overlay-content { transform: translateY(0); }
+.overlay-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 40px; height: 40px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(12,59,125,0.1);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--primary);
+  transition: all 0.2s;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+}
+.overlay-close:hover { background: var(--primary); color: #fff; transform: scale(1.1); }
+.overlay-hero-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 6rem;
+}
+.overlay-body { padding: 36px 40px 50px; }
+@media(max-width:600px) { .overlay-body { padding: 24px 22px 36px; } }
+.overlay-cat-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(12,59,125,0.08);
+  color: var(--primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 16px;
+}
+.overlay-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  color: var(--primary);
+  font-size: 1.9rem;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+@media(max-width:600px) { .overlay-title { font-size: 1.5rem; } }
+.overlay-meta {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-light);
+}
+.overlay-meta span {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  display: flex; align-items: center; gap: 6px;
+}
+.overlay-meta span i { color: var(--accent); }
+.overlay-section-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 1.1rem;
+  margin: 28px 0 12px;
+}
+.overlay-para {
+  color: var(--text-body);
+  font-size: 0.95rem;
+  line-height: 1.85;
+  margin-bottom: 16px;
+}
+.overlay-features-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 20px 0;
+}
+@media(max-width:500px) { .overlay-features-grid { grid-template-columns: 1fr; } }
+.overlay-feature-item {
+  background: var(--bg-off);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.overlay-feature-item i { color: var(--accent); font-size: 0.9rem; margin-top: 2px; flex-shrink: 0; }
+.overlay-feature-item div h6 { font-size: 0.88rem; font-weight: 700; color: var(--primary); margin-bottom: 2px; }
+.overlay-feature-item div p { font-size: 0.78rem; color: var(--text-muted); margin: 0; }
+.overlay-specs-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 0.88rem;
+}
+.overlay-specs-table tr { border-bottom: 1px solid var(--border-light); }
+.overlay-specs-table td:first-child { color: var(--text-muted); padding: 10px 0; width: 45%; }
+.overlay-specs-table td:last-child { font-weight: 600; color: var(--primary); }
+.overlay-cta {
+  margin-top: 32px;
+  padding: 28px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  border-radius: 16px;
+  text-align: center;
+}
+.overlay-cta h5 { color: #fff; font-family: 'Syne',sans-serif; font-weight: 700; margin-bottom: 8px; }
+.overlay-cta p { color: rgba(255,255,255,0.75); font-size: 0.88rem; margin-bottom: 18px; }
+.overlay-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #fff;
+  padding: 13px 28px;
+  border-radius: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.overlay-cta a:hover { background: var(--accent-hover); transform: translateY(-2px); }
+.blog-overlay-content p { line-height: 1.9; font-size: 0.95rem; color: var(--text-body); margin-bottom: 18px; }
+.blog-overlay-content h3 { font-family: 'Syne',sans-serif; color: var(--primary); font-weight: 700; font-size: 1.15rem; margin: 28px 0 10px; }
+.blog-overlay-content ul { padding-left: 20px; margin-bottom: 16px; }
+.blog-overlay-content ul li { margin-bottom: 8px; color: var(--text-body); font-size: 0.92rem; line-height: 1.7; }
+
+/* ==========================================================================
+   HAMBURGER + MOBILE MENU
+   ========================================================================== */
+.nav-right {
+  display: flex; align-items: center; gap: 12px;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column; justify-content: center; align-items: center;
+  width: 42px; height: 42px;
+  background: transparent; border: 1.5px solid var(--border-light);
+  border-radius: 10px; cursor: pointer; gap: 5px;
+  transition: border-color 0.3s;
+  padding: 0;
+}
+.hamburger span {
+  display: block; width: 20px; height: 2px;
+  background: var(--primary); border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255,255,255,0.98);
+  backdrop-filter: blur(20px);
+  z-index: 999;
+  flex-direction: column; align-items: center; justify-content: center;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+.mobile-menu.open {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+.mobile-menu ul {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  width: 90%; max-width: 340px;
+}
+.mobile-menu a.mobile-link {
+  display: flex; align-items: center;
+  width: 100%; padding: 16px 24px;
+  font-family: 'Syne', sans-serif;
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--primary); text-decoration: none;
+  border-radius: 12px;
+  transition: background 0.2s, color 0.2s;
+}
+.mobile-menu a.mobile-link:hover {
+  background: var(--accent-light); color: var(--accent-hover);
+}
+.mobile-menu a.mobile-link.btn-premium {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: white; font-size: 1rem;
+}
+
+/* ==========================================================================
+   GLOBAL RESPONSIVE FIXES
+   ========================================================================== */
+
+/* Prevent horizontal scroll on all pages */
+body { max-width: 100vw; }
+
+/* ==========================================================================
+   TABLET (max 991px)
+   ========================================================================== */
+@media (max-width: 991px) {
+  .hamburger { display: flex; }
+  .d-none.d-md-inline-flex, .d-none.d-md-flex { display: none !important; }
+
+  .navbar-glow { padding: 14px 4%; }
+
+  .hero {
+    padding: 100px 0 60px;
+    text-align: center;
+  }
+  .hero-content { padding: 0 16px; }
+  .hero h1 { font-size: clamp(2rem, 6vw, 3rem); }
+  .hero p { font-size: 1rem; max-width: 100%; }
+  .hero-actions { justify-content: center; }
+  .hero-stats { gap: 28px; justify-content: center; flex-wrap: wrap; margin-top: 40px; }
+
+  .section-padding { padding: 70px 0; }
+
+  .about-float-stat { position: static; margin-top: 20px; }
+  .stats-band-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+
+  .footer-bottom { flex-direction: column; gap: 14px; text-align: center; }
+}
+
+/* ==========================================================================
+   MOBILE (max 767px)
+   ========================================================================== */
+@media (max-width: 767px) {
+  .navbar-glow { padding: 12px 5%; }
+
+  /* Hero */
+  .hero { padding: 90px 0 50px; }
+  .hero h1 { font-size: clamp(1.75rem, 7vw, 2.5rem); margin-bottom: 16px; }
+  .hero p { font-size: 0.95rem; margin-bottom: 28px; }
+  .hero-actions { flex-direction: column; align-items: center; gap: 14px !important; }
+  .hero-actions a { width: 100%; max-width: 300px; justify-content: center; }
+  .hero-stats { flex-direction: column; gap: 20px; align-items: center; margin-top: 32px; padding-top: 28px; }
+  .stat-box { text-align: center; }
+  .stat-box h3 { font-size: 1.8rem; }
+
+  /* Sections */
+  .section-padding { padding: 56px 0; }
+  .container { padding-left: 20px; padding-right: 20px; }
+
+  /* Section headings */
+  .section-title { font-size: clamp(1.6rem, 6vw, 2.2rem) !important; }
+  .section-subtitle { font-size: 0.92rem; }
+
+  /* Service cards */
+  .service-card { padding: 24px 20px; }
+
+  /* Stats band */
+  .stats-band { padding: 40px 0; }
+  .stats-band-item { padding: 20px; }
+  .stats-band-item h3 { font-size: 2rem; }
+
+  /* Blog cards */
+  .blog-body { padding: 20px 18px; }
+  .blog-card h5 { font-size: 1rem; }
+
+  /* Calculator */
+  .calculator-section { padding: 60px 0; }
+  .calc-form-grid { grid-template-columns: 1fr !important; }
+  .calc-result-grid { grid-template-columns: 1fr 1fr !important; }
+  .calc-tabs { flex-direction: column; gap: 4px; }
+
+  /* Portfolio */
+  .portfolio-grid { grid-template-columns: 1fr !important; }
+
+  /* Contact */
+  .contact-form-wrapper { padding: 28px 20px !important; }
+
+  /* Footer */
+  .footer { padding: 60px 0 30px; }
+  .footer p { max-width: 100%; }
+  .footer-bottom { flex-direction: column; gap: 10px; text-align: center; font-size: 0.8rem; }
+  .footer-socials { justify-content: center; }
+
+  /* Buttons global */
+  .btn-premium, .btn-accent, .btn-outline-premium {
+    padding: 12px 22px; font-size: 0.85rem;
+  }
+}
+
+/* ==========================================================================
+   SMALL MOBILE (max 480px)
+   ========================================================================== */
+@media (max-width: 480px) {
+  .container { padding-left: 16px; padding-right: 16px; }
+
+  .hero { padding: 80px 0 44px; }
+  .hero h1 { font-size: 1.65rem; }
+  .hero-badge { font-size: 0.65rem; padding: 6px 14px; }
+
+  .section-title { font-size: 1.5rem !important; }
+
+  .stat-box h3 { font-size: 1.6rem; }
+
+  /* Make all cards full width */
+  .blog-card, .service-card { border-radius: 14px; }
+
+  /* Overlays */
+  .overlay-body { padding: 20px 16px 32px !important; }
+  .overlay-title { font-size: 1.3rem !important; }
+
+  /* Calculator result grid */
+  .calc-result-grid { grid-template-columns: 1fr !important; }
+
+  /* Footer columns */
+  .footer .col-6 { width: 100% !important; max-width: 100% !important; }
+
+  /* Nav logo */
+  .nav-logo img { height: 36px !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- SOLAR RAY CANVAS -->
+<canvas id="solarCanvas"></canvas>
+
+<!-- NAVBAR -->
+<nav class="navbar-glow" id="navbar">
+  <a href="#" class="nav-logo">
+    <img src="cropped-GlowGrid-1.png" alt="GlowGrid Technologies Logo" style="height:44px;width:auto;display:block;">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#calculator">Calculator</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#blog">Articles</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#contact" class="btn-premium d-none d-md-inline-flex">Get Free Quote <i class="fas fa-arrow-right"></i></a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<!-- MOBILE MENU OVERLAY -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#about" class="mobile-link">About</a></li>
+    <li><a href="#services" class="mobile-link">Services</a></li>
+    <li><a href="#calculator" class="mobile-link">Calculator</a></li>
+    <li><a href="#portfolio" class="mobile-link">Portfolio</a></li>
+    <li><a href="#blog" class="mobile-link">Articles</a></li>
+    <li><a href="#contact" class="mobile-link btn-premium" style="margin-top:10px;justify-content:center;">Get Free Quote</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-geo">
+    <div class="geo-ring"></div>
+    <div class="geo-ring"></div>
+    <div class="geo-ring"></div>
+    <div class="geo-ring"></div>
+  </div>
+
+  <div class="particles-hero" id="heroParticles"></div>
+
+  <div class="sun-burst" id="sunBurst">
+    <div class="sun-halo" style="width:200px;height:200px;"></div>
+    <div class="sun-halo" style="width:280px;height:280px;animation-delay:0.5s;"></div>
+    <div class="sun-halo" style="width:360px;height:360px;animation-delay:1s;"></div>
+    <div class="sun-core"></div>
+  </div>
+
+  <div class="hero-panel-container">
+    <svg viewBox="0 0 500 420" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="260" cy="400" rx="180" ry="16" fill="rgba(12,59,125,0.08)"/>
+      <rect x="60" y="370" width="380" height="20" rx="8" fill="#e2e8f0"/>
+      <rect x="80" y="160" width="340" height="210" rx="12" fill="#0C3B7D" stroke="#164fa8" stroke-width="3"/>
+      <rect x="92" y="172" width="316" height="186" rx="6" fill="#082c5e"/>
+      <line x1="92" y1="234" x2="408" y2="234" stroke="#00C650" stroke-width="1.5" opacity="0.4"/>
+      <line x1="92" y1="296" x2="408" y2="296" stroke="#00C650" stroke-width="1.5" opacity="0.4"/>
+      <line x1="171" y1="172" x2="171" y2="358" stroke="#00C650" stroke-width="1.5" opacity="0.4"/>
+      <line x1="250" y1="172" x2="250" y2="358" stroke="#00C650" stroke-width="1.5" opacity="0.4"/>
+      <line x1="329" y1="172" x2="329" y2="358" stroke="#00C650" stroke-width="1.5" opacity="0.4"/>
+      <rect x="92" y="172" width="316" height="186" rx="6" fill="url(#cellSheen)" opacity="0.5"/>
+      <line x1="180" y1="370" x2="160" y2="370" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
+      <line x1="320" y1="370" x2="340" y2="370" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
+      <line x1="180" y1="365" x2="195" y2="340" stroke="#64748b" stroke-width="3" stroke-linecap="round"/>
+      <line x1="320" y1="365" x2="305" y2="340" stroke="#64748b" stroke-width="3" stroke-linecap="round"/>
+      <line x1="430" y1="80" x2="320" y2="200" stroke="url(#beamGrad)" stroke-width="3" stroke-dasharray="8 6" opacity="0.7">
+        <animate attributeName="stroke-dashoffset" from="0" to="28" dur="1.2s" repeatCount="indefinite"/>
+      </line>
+      <line x1="450" y1="120" x2="340" y2="220" stroke="url(#beamGrad2)" stroke-width="2" stroke-dasharray="6 8" opacity="0.5">
+        <animate attributeName="stroke-dashoffset" from="0" to="28" dur="1.8s" repeatCount="indefinite"/>
+      </line>
+      <circle cx="450" cy="60" r="28" fill="#00C650" opacity="0.9"/>
+      <circle cx="450" cy="60" r="40" fill="#00C650" opacity="0.15"/>
+      <rect x="92" y="172" width="316" height="186" rx="6" fill="rgba(0,198,80,0.04)">
+        <animate attributeName="opacity" values="0;0.08;0" dur="3s" repeatCount="indefinite"/>
+      </rect>
+      <path d="M250 365 Q250 390 220 390 L120 390" stroke="#00C650" stroke-width="2.5" fill="none" stroke-dasharray="5 4">
+        <animate attributeName="stroke-dashoffset" from="0" to="18" dur="1s" repeatCount="indefinite"/>
+      </path>
+      <rect x="60" y="375" width="60" height="30" rx="6" fill="#0C3B7D" stroke="#164fa8" stroke-width="2"/>
+      <rect x="120" y="382" width="8" height="16" rx="2" fill="#164fa8"/>
+      <rect x="64" y="379" width="42" height="22" rx="4" fill="url(#batFill)"/>
+      <text x="78" y="395" font-size="9" fill="white" font-family="sans-serif" font-weight="bold">100%</text>
+      <defs>
+        <linearGradient id="cellSheen" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#00C650" stop-opacity="0.2"/>
+          <stop offset="50%" stop-color="#0C3B7D" stop-opacity="0.05"/>
+          <stop offset="100%" stop-color="#00C650" stop-opacity="0.15"/>
+        </linearGradient>
+        <linearGradient id="beamGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#00C650"/>
+          <stop offset="100%" stop-color="rgba(0,198,80,0)"/>
+        </linearGradient>
+        <linearGradient id="beamGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#00C650"/>
+          <stop offset="100%" stop-color="rgba(0,198,80,0)"/>
+        </linearGradient>
+        <linearGradient id="batFill" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#00C650"/>
+          <stop offset="100%" stop-color="#00a843"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <div class="container" style="position:relative;z-index:3;">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="hero-content">
+          <div class="hero-badge"><div class="badge-pulse"></div>Pakistan's #1 Solar Company</div>
+          <h1>Pakistan's Most Trusted <span class="accent-word">Solar Energy</span> Solutions Provider</h1>
+          <p>GlowGrid Technologies serves Rawalpindi & Islamabad with premium Tier-1 solar panels, net metering, and complete installation. Reduce bills by up to 100% with proven solutions.</p>
+          <div class="hero-actions d-flex gap-3 flex-wrap">
+            <a href="#services" class="btn-premium">Explore Solutions <i class="fas fa-arrow-right"></i></a>
+            <a href="#about" class="btn-outline-premium">About Us</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-box">
+              <h3><span class="count-up" data-target="4">0</span><span>.<span style="color:var(--accent)">6</span>MW+</span></h3>
+              <p>Projects Completed</p>
+            </div>
+            <div class="stat-box">
+              <h3><span style="color:var(--accent)">3.6</span>MW</h3>
+              <p>Pipeline</p>
+            </div>
+            <div class="stat-box">
+              <h3><span class="count-up" data-target="25">0</span><span style="color:var(--accent)"> Yrs</span></h3>
+              <p>Panel Warranty</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section-padding about-section" id="about">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5 reveal">
+        <div class="about-img-wrap" style="padding-bottom:30px;">
+          <div class="about-img-card">
+            <i class="fas fa-solar-panel big-icon"></i>
+            <div class="about-badge"><div class="badge-pulse"></div>Est. in Rawalpindi</div>
+            <h3>Powering Pakistan with Clean, Affordable Solar Energy</h3>
+            <p>GlowGrid Technologies Pvt. Ltd. (GGT) — a fully registered company under SECP, FBR, and PEC.</p>
+          </div>
+          <div class="about-float-stat">
+            <div class="stat-icon"><i class="fas fa-bolt"></i></div>
+            <div>
+              <strong>1800–2000</strong>
+              <span>Avg. Monthly Units Saved</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-7 reveal delay-1">
+        <div class="section-label">Who We Are</div>
+        <h2 class="section-title">About GlowGrid Technologies</h2>
+        <p style="color:var(--text-muted);font-size:1rem;line-height:1.8;margin-bottom:36px;">
+          GlowGrid Technologies is your complete solar energy solution provider in Rawalpindi and Islamabad. We specialize in residential and commercial solar panel installation, net metering services, and renewable energy solutions across Pakistan. With over <strong style="color:var(--primary);">4.6MW of solar projects completed</strong> and 3.6MW in pipeline, we're helping homes and businesses achieve energy independence while slashing electricity costs.
+        </p>
+
+        <div class="row g-0">
+          <div class="col-md-6">
+            <div class="why-item">
+              <div class="why-icon"><i class="fas fa-certificate"></i></div>
+              <div>
+                <h5>Tier-1 Solar Panels</h5>
+                <p>Jinko, Longi, JA Solar, Canadian Solar — only the best brands installed.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="why-item">
+              <div class="why-icon"><i class="fas fa-hard-hat"></i></div>
+              <div>
+                <h5>PEC-Certified Engineers</h5>
+                <p>Professional installation by qualified & licensed electrical engineers.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="why-item">
+              <div class="why-icon"><i class="fas fa-file-invoice"></i></div>
+              <div>
+                <h5>Complete Net Metering Support</h5>
+                <p>End-to-end NEPRA/DISCO net metering application handled for you.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="why-item">
+              <div class="why-icon"><i class="fas fa-shield-alt"></i></div>
+              <div>
+                <h5>25-Year Panel Warranty</h5>
+                <p>10-Year installation guarantee with long-term performance assurance.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="why-item">
+              <div class="why-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div>
+                <h5>Free Site Survey</h5>
+                <p>Complimentary site survey & energy audit across Twin Cities.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="why-item">
+              <div class="why-icon"><i class="fas fa-piggy-bank"></i></div>
+              <div>
+                <h5>Average Savings: 1800–2000 Units</h5>
+                <p>Proven monthly savings helping households go electricity-bill-free.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex gap-3 flex-wrap mt-2">
+          <a href="#contact" class="btn-premium">Get Free Consultation <i class="fas fa-arrow-right"></i></a>
+          <a href="tel:+923040552302" class="btn-outline-premium"><i class="fas fa-phone"></i> +92 304-0552302</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section-padding services-section" id="services">
+  <div class="container">
+    <div class="text-center reveal">
+      <div class="section-label" style="justify-content:center;">What We Offer</div>
+      <h2 class="section-title">Our Core Services</h2>
+      <p class="section-subtitle">From residential rooftops to industrial facilities, GlowGrid delivers end-to-end solar solutions across Pakistan with premium Tier-1 equipment and guaranteed results.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4 reveal"><div class="service-card"><div class="service-icon"><i class="fas fa-home"></i></div><h4>Residential Solar Systems</h4><p>Transform your home into a power station. Our 5kW to 24kW on-grid and hybrid solar systems help Rawalpindi and Islamabad homeowners save up to PKR 50,000 monthly on electricity bills.</p></div></div>
+      <div class="col-md-4 reveal delay-1"><div class="service-card"><div class="service-icon"><i class="fas fa-industry"></i></div><h4>Commercial Solar Solutions</h4><p>Power your business with cost-effective solar energy. We've completed projects from 15kW plazas to 250kW industrial installations across Pakistan with full ROI analysis.</p></div></div>
+      <div class="col-md-4 reveal delay-2"><div class="service-card"><div class="service-icon"><i class="fas fa-sync-alt"></i></div><h4>Net Metering Services</h4><p>Complete net metering application assistance for IESCO and other DISCOs. We handle documentation, technical approvals, bi-directional meter installation, and system commissioning start to finish.</p></div></div>
+      <div class="col-md-4 reveal"><div class="service-card"><div class="service-icon"><i class="fas fa-battery-full"></i></div><h4>Hybrid & Battery Storage</h4><p>Smart lithium-ion battery backup systems (Pylontech, BYD) ensuring uninterrupted power during load shedding. Use stored solar energy freely at night or during outages.</p></div></div>
+      <div class="col-md-4 reveal delay-1"><div class="service-card"><div class="service-icon"><i class="fas fa-solar-panel"></i></div><h4>Off-Grid Solar Systems</h4><p>Fully independent solar systems for remote areas, farms, and rural homes without WAPDA connection. Custom designed for maximum self-sufficiency with 100% battery-based operation.</p></div></div>
+      <div class="col-md-4 reveal delay-2"><div class="service-card"><div class="service-icon"><i class="fas fa-tools"></i></div><h4>Maintenance & O&M</h4><p>Annual maintenance contracts, system performance monitoring, panel cleaning, inverter servicing, and fault diagnosis to keep your solar yields at 100% capacity year-round.</p></div></div>
+      <div class="col-md-4 reveal"><div class="service-card placeholder-card"><div class="service-icon"><i class="fas fa-search-location"></i></div><h4>Solar Audits & Site Survey</h4><p>Professional site inspections, shade analysis, and rooftop feasibility studies to guarantee the most efficient panel placement and accurate system sizing for your property.</p><span class="coming-soon-tag">Free for Twin Cities</span></div></div>
+      <div class="col-md-4 reveal delay-1"><div class="service-card placeholder-card"><div class="service-icon"><i class="fas fa-tractor"></i></div><h4>Agricultural Solar Solutions</h4><p>Purpose-built solar systems for tube wells, cold storage, poultry farms, and agricultural operations. Cut diesel costs and achieve energy independence in rural areas.</p><span class="coming-soon-tag">Coming Soon</span></div></div>
+      <div class="col-md-4 reveal delay-2"><div class="service-card placeholder-card"><div class="service-icon"><i class="fas fa-school"></i></div><h4>Solar for Schools & Institutions</h4><p>Affordable solar energy programs for schools, hospitals, mosques, and government institutions. Helping Pakistan's public sector reduce operating costs and embrace green energy.</p><span class="coming-soon-tag">Coming Soon</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<div class="stats-band" id="stats">
+  <div class="container">
+    <div class="row g-0">
+      <div class="col-6 col-md-3"><div class="stats-band-item reveal"><div class="stats-band-num"><span class="count-band" data-target="4">0</span>.6MW+</div><div class="stats-band-label">Capacity Installed</div></div></div>
+      <div class="col-6 col-md-3"><div class="stats-band-item reveal delay-1"><div class="stats-band-num"><span class="count-band" data-target="3">0</span>.6MW</div><div class="stats-band-label">In Pipeline</div></div></div>
+      <div class="col-6 col-md-3"><div class="stats-band-item reveal delay-2"><div class="stats-band-num"><span class="count-band" data-target="2000">0</span></div><div class="stats-band-label">Avg. Monthly Units Saved</div></div></div>
+      <div class="col-6 col-md-3"><div class="stats-band-item reveal delay-3"><div class="stats-band-num"><span class="count-band" data-target="25">0</span>yr</div><div class="stats-band-label">Panel Warranty</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- INTERACTIVE SCROLL PROCESS -->
+<section class="solar-process-section" id="process">
+  <div class="solar-track" id="processTrack">
+    <div class="solar-sticky">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-5">
+            <div class="section-label" style="color:#4dff8e;">The Solar Journey</div>
+            <div class="process-text-container" id="textStack">
+              <div class="process-step active">
+                <span class="step-num">01 / Capture</span>
+                <h3>Smart Solar Panels</h3>
+                <p>Our Tier-1 monocrystalline bifacial panels from Jinko and Longi absorb sunlight with industry-leading efficiency, generating maximum DC power even in low-light conditions.</p>
+              </div>
+              <div class="process-step">
+                <span class="step-num">02 / Convert</span>
+                <h3>Intelligent Inverters</h3>
+                <p>Growatt, Huawei, and Sungrow inverters seamlessly convert DC energy into usable AC power, optimizing flow and preventing energy loss with 98%+ efficiency ratings.</p>
+              </div>
+              <div class="process-step">
+                <span class="step-num">03 / Store</span>
+                <h3>Battery Backup</h3>
+                <p>Excess daytime energy is stored in sleek, high-capacity lithium batteries. Use your stored solar power freely during the night or during load shedding.</p>
+              </div>
+              <div class="process-step">
+                <span class="step-num">04 / Share</span>
+                <h3>Net-Metering Export</h3>
+                <p>When your batteries are full, surplus power is exported to WAPDA grid via net metering. Your DISCO credits these units — watch your monthly bill drop to zero.</p>
+              </div>
+            </div>
+            <div class="step-dots" id="stepDots">
+              <div class="step-dot active"></div>
+              <div class="step-dot"></div>
+              <div class="step-dot"></div>
+              <div class="step-dot"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-7">
+            <div class="process-visual-container">
+              <!-- Step 1: Panel + Sun -->
+              <svg class="solar-svg active" viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="sunGrad1" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#00e85a"/>
+                    <stop offset="100%" stop-color="#00C650"/>
+                  </radialGradient>
+                  <linearGradient id="cellSheen1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00C650" stop-opacity="0.25"/>
+                    <stop offset="100%" stop-color="#0C3B7D" stop-opacity="0.1"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="310" cy="70" r="55" fill="#00C650" opacity="0.08">
+                  <animate attributeName="r" values="50;60;50" dur="3s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="310" cy="70" r="38" fill="url(#sunGrad1)" opacity="0.9"/>
+                <line x1="310" y1="20" x2="310" y2="5" stroke="#00e85a" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+                <line x1="355" y1="35" x2="368" y2="22" stroke="#00e85a" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+                <line x1="360" y1="70" x2="377" y2="70" stroke="#00e85a" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+                <line x1="265" y1="35" x2="252" y2="22" stroke="#00e85a" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+                <line x1="285" y1="100" x2="235" y2="170" stroke="#00C650" stroke-width="2.5" stroke-dasharray="7 5" opacity="0.6">
+                  <animate attributeName="stroke-dashoffset" from="0" to="24" dur="1s" repeatCount="indefinite"/>
+                </line>
+                <rect x="60" y="160" width="260" height="150" rx="8" fill="#0C3B7D" stroke="#164fa8" stroke-width="3"/>
+                <rect x="72" y="172" width="236" height="126" rx="4" fill="#082c5e"/>
+                <rect x="72" y="172" width="236" height="126" rx="4" fill="url(#cellSheen1)" opacity="0.6"/>
+                <line x1="72" y1="214" x2="308" y2="214" stroke="#00C650" stroke-width="1.5" opacity="0.5"/>
+                <line x1="72" y1="256" x2="308" y2="256" stroke="#00C650" stroke-width="1.5" opacity="0.5"/>
+                <line x1="151" y1="172" x2="151" y2="298" stroke="#00C650" stroke-width="1.5" opacity="0.5"/>
+                <line x1="230" y1="172" x2="230" y2="298" stroke="#00C650" stroke-width="1.5" opacity="0.5"/>
+                <rect x="72" y="172" width="236" height="126" rx="4" fill="rgba(0,198,80,0.06)">
+                  <animate attributeName="opacity" values="0;1;0" dur="2.5s" repeatCount="indefinite"/>
+                </rect>
+              </svg>
+
+              <!-- Step 2: Inverter -->
+              <svg class="solar-svg" viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+                <rect x="130" y="60" width="140" height="200" rx="14" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="3"/>
+                <rect x="148" y="82" width="104" height="56" rx="6" fill="#082c5e"/>
+                <path d="M156 110 Q165 90 174 110 Q183 130 192 110 Q201 90 210 110 Q219 130 228 110 Q237 90 244 110" fill="none" stroke="#00C650" stroke-width="2.5">
+                  <animate attributeName="stroke-dasharray" values="0,200;200,0" dur="2s" repeatCount="indefinite"/>
+                </path>
+                <circle cx="160" cy="155" r="6" fill="#00C650"><animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/></circle>
+                <circle cx="180" cy="155" r="6" fill="#0C3B7D"/>
+                <circle cx="200" cy="155" r="6" fill="#164fa8"/>
+                <rect x="148" y="172" width="104" height="26" rx="4" fill="#e2e8f0"/>
+                <text x="200" y="189" text-anchor="middle" font-size="10" fill="#64748b" font-family="sans-serif" font-weight="600">INVERTER 5kW</text>
+                <rect x="155" y="260" width="20" height="30" rx="4" fill="#94a3b8"/>
+                <rect x="190" y="260" width="20" height="30" rx="4" fill="#0C3B7D"/>
+                <rect x="225" y="260" width="20" height="30" rx="4" fill="#94a3b8"/>
+                <path d="M60 160 L130 160" fill="none" stroke="#00C650" stroke-width="3" marker-end="url(#arrow1)" stroke-dasharray="6 4">
+                  <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="0.8s" repeatCount="indefinite"/>
+                </path>
+                <text x="70" y="150" font-size="11" fill="#00C650" font-family="sans-serif" font-weight="700">DC IN</text>
+                <path d="M270 160 L340 160" fill="none" stroke="#00e85a" stroke-width="3" marker-end="url(#arrow2)" stroke-dasharray="6 4">
+                  <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="0.8s" repeatCount="indefinite"/>
+                </path>
+                <text x="278" y="150" font-size="11" fill="#00e85a" font-family="sans-serif" font-weight="700">AC OUT</text>
+                <defs>
+                  <marker id="arrow1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                    <path d="M0 0 L6 3 L0 6 Z" fill="#00C650"/>
+                  </marker>
+                  <marker id="arrow2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                    <path d="M0 0 L6 3 L0 6 Z" fill="#00e85a"/>
+                  </marker>
+                </defs>
+              </svg>
+
+              <!-- Step 3: Battery -->
+              <svg class="solar-svg" viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="batGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#00C650"/>
+                    <stop offset="85%" stop-color="#00a843"/>
+                    <stop offset="100%" stop-color="#00C650">
+                      <animate attributeName="offset" values="0.85;0.95;0.85" dur="2s" repeatCount="indefinite"/>
+                    </stop>
+                  </linearGradient>
+                </defs>
+                <rect x="100" y="90" width="200" height="140" rx="12" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="3"/>
+                <rect x="300" y="145" width="24" height="30" rx="6" fill="#94a3b8"/>
+                <rect x="116" y="110" width="168" height="30" rx="8" fill="#e2e8f0"/>
+                <rect x="118" y="112" width="162" height="26" rx="7" fill="url(#batGrad)">
+                  <animate attributeName="width" values="40;162;162" dur="1.5s" fill="freeze"/>
+                </rect>
+                <text x="200" y="130" text-anchor="middle" font-size="13" fill="white" font-family="sans-serif" font-weight="800">85%</text>
+                <text x="200" y="180" text-anchor="middle" font-size="14" fill="#0C3B7D" font-family="sans-serif" font-weight="700">LITHIUM STORAGE</text>
+                <text x="200" y="200" text-anchor="middle" font-size="11" fill="#64748b" font-family="sans-serif">10 kWh Capacity</text>
+                <path d="M192 218 L204 210 L200 222 L212 214 L200 222 Z" fill="#00C650" stroke="#00C650" stroke-linejoin="round"/>
+                <path d="M200 240 L200 290" stroke="#00C650" stroke-width="2.5" stroke-dasharray="5 5">
+                  <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="1s" repeatCount="indefinite"/>
+                </path>
+                <circle cx="200" cy="298" r="8" fill="rgba(0,198,80,0.2)" stroke="#00C650" stroke-width="2">
+                  <animate attributeName="r" values="8;12;8" dur="1.5s" repeatCount="indefinite"/>
+                </circle>
+              </svg>
+
+              <!-- Step 4: Grid House / Net Metering -->
+              <svg class="solar-svg" viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="exportLine" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#00C650"/>
+                    <stop offset="100%" stop-color="#0C3B7D"/>
+                  </linearGradient>
+                </defs>
+                <path d="M140 270 L140 170 L200 110 L260 170 L260 270 Z" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="3" stroke-linejoin="round"/>
+                <path d="M120 180 L200 100 L280 180" fill="none" stroke="#0C3B7D" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="182" y="225" width="36" height="45" rx="3" fill="#94a3b8"/>
+                <rect x="155" y="185" width="35" height="30" rx="3" fill="#bae6fd"/>
+                <rect x="218" y="185" width="35" height="30" rx="3" fill="#bae6fd"/>
+                <rect x="168" y="130" width="64" height="38" rx="4" fill="#0C3B7D" opacity="0.8"/>
+                <line x1="168" y1="149" x2="232" y2="149" stroke="#00C650" stroke-width="1"/>
+                <line x1="200" y1="130" x2="200" y2="168" stroke="#00C650" stroke-width="1"/>
+                <line x1="340" y1="90" x2="340" y2="270" stroke="#64748b" stroke-width="5" stroke-linecap="round"/>
+                <line x1="320" y1="120" x2="360" y2="120" stroke="#64748b" stroke-width="3"/>
+                <line x1="320" y1="155" x2="360" y2="155" stroke="#64748b" stroke-width="3"/>
+                <path d="M270 190 Q300 170 320 140" fill="none" stroke="url(#exportLine)" stroke-width="3" stroke-dasharray="8 5">
+                  <animate attributeName="stroke-dashoffset" from="0" to="-26" dur="1s" repeatCount="indefinite"/>
+                </path>
+                <rect x="274" y="196" width="76" height="22" rx="4" fill="#00C650" opacity="0.15"/>
+                <text x="312" y="211" text-anchor="middle" font-size="10" fill="#00a843" font-family="sans-serif" font-weight="700">EXPORTING 2kW</text>
+                <rect x="310" y="62" width="70" height="24" rx="8" fill="#0C3B7D"/>
+                <text x="345" y="78" text-anchor="middle" font-size="10" fill="white" font-family="sans-serif" font-weight="800">BILL CREDIT ✓</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="calculator-section" id="calculator">
+  <div class="container">
+    <div class="text-center reveal mb-5">
+      <div class="section-label" style="justify-content:center;color:rgba(255,255,255,0.6);">Estimate Your Savings</div>
+      <h2 class="section-title" style="color:#fff;">Solar Savings Calculator</h2>
+      <p class="section-subtitle" style="color:rgba(255,255,255,0.6);">Compare On-Grid and Off-Grid/Hybrid savings. Enter your electricity usage to get a personalised estimate.</p>
+    </div>
+    <div class="row g-4 align-items-start">
+      <div class="col-lg-7 reveal">
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:36px;">
+          <div class="calc-tabs">
+            <button class="calc-tab active" onclick="switchCalcTab('ongrid',this)">⚡ On-Grid System</button>
+            <button class="calc-tab" onclick="switchCalcTab('hybrid',this)">🔋 Hybrid / Off-Grid</button>
+          </div>
+
+          <div class="calc-panel active" id="panel-ongrid">
+            <div class="calc-form-grid">
+              <div><label class="calc-label">Monthly Bill (PKR)</label><input class="calc-input" id="og-bill" type="number" placeholder="e.g. 25000"></div>
+              <div><label class="calc-label">Monthly Units (kWh)</label><input class="calc-input" id="og-units" type="number" placeholder="e.g. 600"></div>
+              <div><label class="calc-label">Unit Rate (PKR)</label><input class="calc-input" id="og-rate" type="number" value="45"></div>
+              <div><label class="calc-label">Net Metering?</label><select class="calc-select" id="og-meter"><option value="no">No</option><option value="yes">Yes — export excess</option></select></div>
+              <div><label class="calc-label">System Size (kW)</label><input class="calc-input" id="og-size" type="number" placeholder="e.g. 10"></div>
+              <div><label class="calc-label">Peak Sun Hours/Day</label><input class="calc-input" id="og-sun" type="number" value="5"></div>
+            </div>
+            <button class="calc-btn-submit" onclick="calcOnGrid()"><i class="fas fa-bolt"></i> Calculate On-Grid Savings</button>
+            <div class="calc-result-card" id="og-result"></div>
+          </div>
+
+          <div class="calc-panel" id="panel-hybrid">
+            <div class="calc-form-grid">
+              <div><label class="calc-label">Monthly Units (kWh)</label><input class="calc-input" id="hy-units" type="number" placeholder="e.g. 600"></div>
+              <div><label class="calc-label">Unit Rate (PKR)</label><input class="calc-input" id="hy-rate" type="number" value="45"></div>
+              <div><label class="calc-label">System Size (kW)</label><input class="calc-input" id="hy-size" type="number" placeholder="e.g. 8"></div>
+              <div><label class="calc-label">Battery Capacity (kWh)</label><input class="calc-input" id="hy-battery" type="number" placeholder="e.g. 10"></div>
+              <div><label class="calc-label">Load Shedding (hrs/day)</label><input class="calc-input" id="hy-loadshed" type="number" placeholder="e.g. 4" value="4"></div>
+              <div><label class="calc-label">Generator Fuel (PKR/day)</label><input class="calc-input" id="hy-fuel" type="number" placeholder="e.g. 800"></div>
+            </div>
+            <button class="calc-btn-submit" onclick="calcHybrid()"><i class="fas fa-battery-full"></i> Calculate Hybrid Savings</button>
+            <div class="calc-result-card" id="hy-result"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5 reveal delay-1">
+        <div class="calc-info-box">
+          <h4>Which System Is Right for You?</h4>
+          <div class="calc-feature-row"><div class="icon"><i class="fas fa-plug"></i></div><div class="text"><h6>On-Grid System</h6><p>Best if you have stable grid. Maximum ROI with net metering. Feed excess electricity back and earn credits.</p></div></div>
+          <div class="calc-feature-row"><div class="icon"><i class="fas fa-battery-three-quarters"></i></div><div class="text"><h6>Hybrid System</h6><p>Best if you face load shedding. Combines solar + battery storage for 24/7 power independence.</p></div></div>
+          <div class="calc-feature-row"><div class="icon"><i class="fas fa-solar-panel"></i></div><div class="text"><h6>Off-Grid System</h6><p>Best for remote areas with no grid. 100% battery-based, fully independent from WAPDA.</p></div></div>
+          <div class="calc-feature-row"><div class="icon"><i class="fas fa-chart-line"></i></div><div class="text"><h6>Typical ROI: 3–4 Years</h6><p>Most GlowGrid clients recover their investment in under 4 years with 25-year panel warranties.</p></div></div>
+          <a href="#contact" class="btn-premium mt-4 d-flex" style="justify-content:center;">Get Free Site Survey <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio-section section-padding" id="portfolio">
+  <div class="container">
+    <div class="text-center reveal">
+      <div class="section-label" style="justify-content:center;">Our Work</div>
+      <h2 class="section-title">Completed Projects</h2>
+      <p class="section-subtitle">From residential rooftops to large commercial installations — explore our portfolio of successfully delivered solar energy projects across Pakistan.</p>
+    </div>
+
+    <div class="portfolio-filters reveal">
+      <button class="pf-btn active" onclick="filterPortfolio('all',this)">All Projects</button>
+      <button class="pf-btn" onclick="filterPortfolio('residential',this)">Residential</button>
+      <button class="pf-btn" onclick="filterPortfolio('hybrid',this)">Hybrid</button>
+      <button class="pf-btn" onclick="filterPortfolio('commercial',this)">Commercial</button>
+      <button class="pf-btn" onclick="filterPortfolio('government',this)">Government</button>
+    </div>
+
+    <div class="portfolio-grid" id="portfolioGrid">
+      <div class="portfolio-card reveal" data-cat="hybrid" onclick="openProject('khanpur')"><div class="portfolio-thumb"><div class="portfolio-thumb-bg" style="background:linear-gradient(135deg,#071e40,#0C3B7D);">☀️</div><div class="portfolio-thumb-overlay"><div class="portfolio-view-btn"><i class="fas fa-arrow-right"></i></div></div><span class="portfolio-badge hybrid">Hybrid</span></div><div class="portfolio-body"><h5>10kW Hybrid Residential System — Khanpur</h5><p>Dual-configuration on-grid + 6kW hybrid system with lithium battery storage, TOMZN safety systems, and XLPO cabling.</p><div class="portfolio-specs"><span class="spec-tag">10kW On-Grid</span><span class="spec-tag">6kW Hybrid</span><span class="spec-tag">5.12kWh Battery</span></div></div></div>
+      <div class="portfolio-card reveal delay-1" data-cat="hybrid" onclick="openProject('bahria')"><div class="portfolio-thumb"><div class="portfolio-thumb-bg" style="background:linear-gradient(135deg,#0a2c5a,#1a4fa8);">🏠</div><div class="portfolio-thumb-overlay"><div class="portfolio-view-btn"><i class="fas fa-arrow-right"></i></div></div><span class="portfolio-badge hybrid">Hybrid</span></div><div class="portfolio-body"><h5>10kW Hybrid Residential — Bahria Town Phase 8</h5><p>Advanced dual-inverter system with Growatt on-grid, Nitrox hybrid inverter, Dongjin battery storage & WiFi monitoring.</p><div class="portfolio-specs"><span class="spec-tag">Growatt 10kW</span><span class="spec-tag">8kW Nitrox</span><span class="spec-tag">WiFi Monitoring</span></div></div></div>
+      <div class="portfolio-card reveal delay-2" data-cat="government" onclick="openProject('pwd')"><div class="portfolio-thumb"><div class="portfolio-thumb-bg" style="background:linear-gradient(135deg,#003d2a,#0f766e);">🏛️</div><div class="portfolio-thumb-overlay"><div class="portfolio-view-btn"><i class="fas fa-arrow-right"></i></div></div><span class="portfolio-badge government">Government</span></div><div class="portfolio-body"><h5>15kW Government On-Grid System — PWD Islamabad</h5><p>Institutional-grade installation for government infrastructure using Fox 25kW inverter and Aiko N-type bifacial panels with ABC technology.</p><div class="portfolio-specs"><span class="spec-tag">Fox 25kW</span><span class="spec-tag">24 Aiko Panels</span><span class="spec-tag">Mughal Steel</span></div></div></div>
+      <div class="portfolio-card reveal" data-cat="residential" onclick="openProject('askari')"><div class="portfolio-thumb"><div class="portfolio-thumb-bg" style="background:linear-gradient(135deg,#1a3a5c,#2d6a9f);">⚡</div><div class="portfolio-thumb-overlay"><div class="portfolio-view-btn"><i class="fas fa-arrow-right"></i></div></div><span class="portfolio-badge">Residential</span></div><div class="portfolio-body"><h5>15kW Residential On-Grid — Askari 7, Rawalpindi</h5><p>Efficient residential energy system with Growatt inverter, 25 JA N-type bifacial panels, and high-rise Mughal steel mounting.</p><div class="portfolio-specs"><span class="spec-tag">Growatt 15kW</span><span class="spec-tag">25 JA Bifacial</span><span class="spec-tag">On-Grid</span></div></div></div>
+      <div class="portfolio-card reveal delay-1" data-cat="commercial" onclick="openProject('jarar')"><div class="portfolio-thumb"><div class="portfolio-thumb-bg" style="background:linear-gradient(135deg,#3d1a00,#b45309);">🏢</div><div class="portfolio-thumb-overlay"><div class="portfolio-view-btn"><i class="fas fa-arrow-right"></i></div></div><span class="portfolio-badge commercial">Commercial</span></div><div class="portfolio-body"><h5>50kW Commercial On-Grid — Jarar Camp Scheme-1</h5><p>High-capacity commercial system with Knox 50kW inverter and 62 Canadian N-type bifacial panels for maximum energy yield.</p><div class="portfolio-specs"><span class="spec-tag">Knox 50kW</span><span class="spec-tag">62 Canadian</span><span class="spec-tag">50kW Output</span></div></div></div>
+      <div class="portfolio-card reveal delay-2" data-cat="commercial" onclick="openProject('taxila')"><div class="portfolio-thumb"><div class="portfolio-thumb-bg" style="background:linear-gradient(135deg,#1a0a3d,#6d28d9);">🌐</div><div class="portfolio-thumb-overlay"><div class="portfolio-view-btn"><i class="fas fa-arrow-right"></i></div></div><span class="portfolio-badge commercial">Commercial</span></div><div class="portfolio-body"><h5>202kW Grid-Tied Solar System — Taxila</h5><p>Large-scale commercial solar installation in Taxila featuring a scalable grid-tied configuration for maximum industrial output.</p><div class="portfolio-specs"><span class="spec-tag">202kW</span><span class="spec-tag">Grid-Tied</span><span class="spec-tag">Industrial</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="page-overlay" id="projectOverlay">
+  <div class="page-overlay-backdrop" onclick="closeOverlay('projectOverlay')"></div>
+  <div class="page-overlay-content">
+    <button class="overlay-close" onclick="closeOverlay('projectOverlay')"><i class="fas fa-times"></i></button>
+    <div id="projectOverlayBody"></div>
+  </div>
+</div>
+
+<!-- BLOG / ARTICLES -->
+<section class="section-padding blog-section" id="blog">
+  <div class="container">
+    <div class="text-center reveal">
+      <div class="section-label" style="justify-content:center;">Knowledge Hub</div>
+      <h2 class="section-title">News &amp; Articles</h2>
+      <p class="section-subtitle">Stay informed about solar energy, net metering, and the latest trends in Pakistan's renewable energy landscape.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4 reveal">
+        <div class="blog-card">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#e8f0fd,#c8e6ff);">
+            <div class="blog-thumb-inner" style="color:#0C3B7D;"><i class="fas fa-sun"></i></div>
+            <span class="blog-category">Benefits</span>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta"><span><i class="fas fa-calendar"></i> 2025</span><span><i class="fas fa-clock"></i> 5 min read</span></div>
+            <h5>Benefits of Installing a Solar Energy System in Pakistan (2025 Guide)</h5>
+            <p>Pakistan faces rising electricity prices and grid instability. Discover how solar can reduce your bill by 70–100%, protect against tariff hikes, and deliver ROI in 3–4 years.</p>
+            <a href="blog/benefits-of-solar-energy-system-in-pakistan-2025-guide.html" class="blog-read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 reveal delay-1">
+        <div class="blog-card">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#e6fff2,#b8f5d0);">
+            <div class="blog-thumb-inner" style="color:#00C650;"><i class="fas fa-exchange-alt"></i></div>
+            <span class="blog-category">Net Metering</span>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta"><span><i class="fas fa-calendar"></i> 2025</span><span><i class="fas fa-clock"></i> 6 min read</span></div>
+            <h5>What Is Net Metering in Pakistan? Complete Beginner Guide (2025)</h5>
+            <p>Net Metering lets you export excess electricity to the grid and receive credit units. Learn eligibility, required documents, and how GlowGrid handles the entire approval process.</p>
+            <a href="blog/what-is-net-metering-in-pakistan-complete-beginner-guide-2025.html" class="blog-read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 reveal delay-2">
+        <div class="blog-card">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);">
+            <div class="blog-thumb-inner" style="color:#f59e0b;"><i class="fas fa-solar-panel"></i></div>
+            <span class="blog-category">Comparison</span>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta"><span><i class="fas fa-calendar"></i> 2025</span><span><i class="fas fa-clock"></i> 4 min read</span></div>
+            <h5>Jinko vs Longi Solar Panels — Which One Is Best for Pakistan?</h5>
+            <p>Both are Tier-1 brands performing exceptionally in Pakistan. Jinko Tiger N-Type edges ahead in efficiency (21–23%), while Longi offers excellent value. Full comparison inside.</p>
+            <a href="blog/jinko-vs-longi-solar-panels-which-one-is-best-for-pakistan.html" class="blog-read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 reveal">
+        <div class="blog-card">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7);">
+            <div class="blog-thumb-inner" style="color:#7b1fa2;"><i class="fas fa-calculator"></i></div>
+            <span class="blog-category">Sizing Guide</span>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta"><span><i class="fas fa-calendar"></i> 2025</span><span><i class="fas fa-clock"></i> 5 min read</span></div>
+            <h5>How Many Solar Panels Do You Need? Complete System Sizing Guide</h5>
+            <p>Use our simple formula: Monthly Units ÷ 110 = Required kW. If you use 1,200 units/month, you need a 10–12 kW system. Full sizing table included for all load types.</p>
+            <a href="blog/how-many-solar-panels-do-you-need-complete-system-sizing-guide.html" class="blog-read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 reveal delay-1">
+        <div class="blog-card">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#e0f7fa,#b2ebf2);">
+            <div class="blog-thumb-inner" style="color:#00838f;"><i class="fas fa-list-ol"></i></div>
+            <span class="blog-category">Top 10</span>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta"><span><i class="fas fa-calendar"></i> 2025</span><span><i class="fas fa-clock"></i> 7 min read</span></div>
+            <h5>Top 10 Reasons to Switch to Solar Energy in 2025 (Pakistan Edition)</h5>
+            <p>From 100% bill reduction to protecting against load shedding, increasing property value, and earning from net metering — here are the top 10 reasons to go solar this year.</p>
+            <a href="blog/top-10-reasons-to-switch-to-solar-energy-in-2025-pakistan-edition.html" class="blog-read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 reveal delay-2">
+        <div class="blog-card">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#fce4ec,#f8bbd0);">
+            <div class="blog-thumb-inner" style="color:#c62828;"><i class="fas fa-landmark"></i></div>
+            <span class="blog-category">Policy</span>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta"><span><i class="fas fa-calendar"></i> 2025</span><span><i class="fas fa-clock"></i> 5 min read</span></div>
+            <h5>Latest Government Policies &amp; Net Metering Updates in Pakistan (2025)</h5>
+            <p>Net Metering remains fully active in Pakistan. NEPRA's 2025 updates, export unit rates, DISCO compliance requirements, and government renewable energy initiatives explained.</p>
+            <a href="blog/latest-government-policies-and-net-metering-updates-in-pakistan-2025.html" class="blog-read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 reveal">
+        <div class="blog-card">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#e8eaf6,#c5cae9);">
+            <div class="blog-thumb-inner" style="color:#283593;"><i class="fas fa-network-wired"></i></div>
+            <span class="blog-category">System Types</span>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta"><span><i class="fas fa-calendar"></i> 2025</span><span><i class="fas fa-clock"></i> 6 min read</span></div>
+            <h5>Grid-Tied vs Hybrid vs Off-Grid — Which Solar System Is Best for You?</h5>
+            <p>Grid-Tied for maximum savings, Hybrid for backup + savings, Off-Grid for remote areas. This detailed comparison helps you choose the right system for your situation.</p>
+            <a href="blog/grid-tied-vs-hybrid-vs-off-grid-which-solar-system-is-best-for-you.html" class="blog-read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 reveal delay-1">
+        <div class="blog-card">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#e0f2f1,#b2dfdb);">
+            <div class="blog-thumb-inner" style="color:#00695c;"><i class="fas fa-building"></i></div>
+            <span class="blog-category">Commercial</span>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta"><span><i class="fas fa-calendar"></i> 2025</span><span><i class="fas fa-clock"></i> 5 min read</span></div>
+            <h5>Commercial Solar Solutions in Pakistan — Why Businesses Are Going Solar</h5>
+            <p>Factories, plazas, hospitals and offices are switching to solar rapidly. Reduce MD charges, peak-hour pricing, and electricity expenses by 70–100% with industrial-grade systems.</p>
+            <a href="blog/commercial-solar-solutions-in-pakistan-why-businesses-are-going-solar.html" class="blog-read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 reveal delay-2">
+        <div class="blog-card">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#fff8e1,#ffecb3);">
+            <div class="blog-thumb-inner" style="color:#f57f17;"><i class="fas fa-plug"></i></div>
+            <span class="blog-category">Inverters</span>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta"><span><i class="fas fa-calendar"></i> 2025</span><span><i class="fas fa-clock"></i> 6 min read</span></div>
+            <h5>Complete Guide to Solar Inverters in Pakistan (Growatt, Huawei, Sungrow)</h5>
+            <p>Growatt for homes, Huawei for high-end commercial, Sungrow for factories. Full efficiency, warranty, and pricing comparison to help you choose the best inverter for your system.</p>
+            <a href="blog/complete-guide-to-solar-inverters-in-pakistan-growatt-huawei-sungrow.html" class="blog-read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 reveal">
+        <div class="blog-card">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);">
+            <div class="blog-thumb-inner" style="color:#1b5e20;"><i class="fas fa-layer-group"></i></div>
+            <span class="blog-category">Technology</span>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta"><span><i class="fas fa-calendar"></i> 2025</span><span><i class="fas fa-clock"></i> 5 min read</span></div>
+            <h5>How Bifacial Solar Panels Work &amp; Why They Are Best for Pakistan</h5>
+            <p>Bifacial panels generate electricity from both sides, increasing output by 10–30%. Jinko N-Type 590W bifacial panels are now the top choice for Pakistan's high-sunlight climate.</p>
+            <a href="blog/how-bifacial-solar-panels-work-and-why-they-are-best-for-pakistan.html" class="blog-read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 reveal delay-1" style="opacity:0.7;">
+        <div class="blog-card" style="border-style:dashed;">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#f4f8ff,#e8f0fd);">
+            <div class="blog-thumb-inner" style="color:#0C3B7D;"><i class="fas fa-briefcase"></i></div>
+            <span class="blog-category" style="background:var(--primary);">Portfolio</span>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta"><span><i class="fas fa-calendar"></i> Coming Soon</span></div>
+            <h5>Our Completed Projects — GlowGrid Portfolio Showcase</h5>
+            <p>Details of our residential and commercial solar projects across Rawalpindi and Islamabad will be featured here. Stay tuned for case studies and photos.</p>
+            <a href="#portfolio" class="blog-read-more" style="color:var(--primary);">Explore Projects <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7 text-center text-lg-start">
+        <div class="section-label" style="color:#4dff8e;justify-content:flex-start;">Get Started Today</div>
+        <h2>Ready to Cut Your Electricity Bills by <span style="color:var(--accent);">Up to 100%?</span></h2>
+        <p class="text-start" style="color:rgba(255,255,255,0.7);font-size:1.05rem;max-width:560px;margin-bottom:30px;">
+          Contact GlowGrid Technologies today for a free site survey and personalized solar savings report. We serve all of Rawalpindi and Islamabad.
+        </p>
+        <div class="row g-2 mb-4">
+          <div class="col-sm-6">
+            <div class="cta-feature"><i class="fas fa-check-circle"></i> Free Site Survey & Energy Audit</div>
+            <div class="cta-feature"><i class="fas fa-check-circle"></i> Complete Net Metering Handling</div>
+            <div class="cta-feature"><i class="fas fa-check-circle"></i> PEC-Certified Engineers</div>
+          </div>
+          <div class="col-sm-6">
+            <div class="cta-feature"><i class="fas fa-check-circle"></i> 25-Year Panel Warranty</div>
+            <div class="cta-feature"><i class="fas fa-check-circle"></i> 10-Year Installation Guarantee</div>
+            <div class="cta-feature"><i class="fas fa-check-circle"></i> Tier-1 Solar Panels Only</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:24px;padding:40px;">
+          <h4 style="color:white;font-family:'Syne',sans-serif;font-weight:800;margin-bottom:24px;">Contact GlowGrid</h4>
+          <div class="d-flex flex-column gap-3">
+            <a href="tel:+923040552302" class="btn-accent" style="justify-content:center;font-size:1rem;padding:16px;">
+              <i class="fas fa-phone"></i> +92 304-0552302
+            </a>
+            <a href="https://glowgridtechnologies.com" target="_blank" class="btn-outline-premium" style="color:white;border-color:rgba(255,255,255,0.2);text-align:center;justify-content:center;padding:16px;">
+              <i class="fas fa-globe"></i> glowgridtechnologies.com
+            </a>
+          </div>
+          <div style="margin-top:24px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.1);">
+            <p style="color:rgba(255,255,255,0.5);font-size:0.8rem;margin:0;">
+              <i class="fas fa-map-marker-alt" style="color:var(--accent);"></i>
+              House No 488, Street 10 4th Main Lane, Rawalpindi, Pakistan
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <a href="#" class="footer-logo">
+          <img src="cropped-GlowGrid-1.png" alt="GlowGrid Technologies" style="height:50px;width:auto;filter:brightness(0) invert(1);">
+        </a>
+        <p>Pakistan's most trusted solar energy solutions provider in Rawalpindi & Islamabad. Premium Tier-1 equipment with guaranteed results.</p>
+        <div class="footer-socials mt-4">
+          <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-md-2 offset-lg-1">
+        <div class="footer-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#blog">Articles</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <div class="footer-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="#">Residential Solar</a></li>
+          <li><a href="#">Commercial Solar</a></li>
+          <li><a href="#">Net Metering</a></li>
+          <li><a href="#">Maintenance</a></li>
+          <li><a href="#">Hybrid Systems</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <div class="footer-title">Contact Us</div>
+        <ul class="footer-links">
+          <li><a href="#"><i class="fas fa-map-marker-alt"></i> House No 488, Street 10, 4th Main Lane, Rawalpindi</a></li>
+          <li><a href="tel:+923040552302"><i class="fas fa-phone"></i> +92 304-0552302</a></li>
+          <li><a href="https://glowgridtechnologies.com" target="_blank"><i class="fas fa-globe"></i> glowgridtechnologies.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="footer-divider">
+
+    <div class="footer-bottom">
+      <div>&copy; 2025 GlowGrid Technologies Pvt. Ltd. All rights reserved.</div>
+      <div style="color:#4a6a8a;font-size:0.82rem;">Serving Rawalpindi &amp; Islamabad</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const dot = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  dot.style.left = mx - 3.5 + 'px';
+  dot.style.top  = my - 3.5 + 'px';
+});
+
+(function animRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx - 17 + 'px';
+  ring.style.top  = ry - 17 + 'px';
+  requestAnimationFrame(animRing);
+})();
+
+document.querySelectorAll('a, button, .service-card, .blog-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { dot.classList.add('hover'); ring.classList.add('hover'); });
+  el.addEventListener('mouseleave', () => { dot.classList.remove('hover'); ring.classList.remove('hover'); });
+});
+
+const canvas = document.getElementById('solarCanvas');
+const ctx = canvas.getContext('2d');
+function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+const rays = [];
+for (let i = 0; i < 18; i++) {
+  rays.push({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    vx: (Math.random() - 0.5) * 0.8,
+    vy: -0.5 - Math.random() * 1.2,
+    len: 40 + Math.random() * 80,
+    opacity: 0.08 + Math.random() * 0.18,
+    hue: Math.random() > 0.5 ? '0,198,80' : '12,59,125',
+    width: 0.5 + Math.random() * 1.5,
+  });
+}
+function drawRays() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  rays.forEach(r => {
+    r.x += r.vx; r.y += r.vy;
+    if (r.y + r.len < 0) { r.y = canvas.height + r.len; r.x = Math.random() * canvas.width; }
+    if (r.x < 0 || r.x > canvas.width) { r.x = Math.random() * canvas.width; r.y = canvas.height; }
+
+    const grad = ctx.createLinearGradient(r.x, r.y, r.x + r.vx * 60, r.y - r.len);
+    grad.addColorStop(0, `rgba(${r.hue},0)`);
+    grad.addColorStop(0.5, `rgba(${r.hue},${r.opacity})`);
+    grad.addColorStop(1, `rgba(${r.hue},0)`);
+
+    ctx.beginPath();
+    ctx.moveTo(r.x, r.y);
+    ctx.lineTo(r.x + r.vx * 60, r.y - r.len);
+    ctx.strokeStyle = grad;
+    ctx.lineWidth = r.width;
+    ctx.stroke();
+  });
+  requestAnimationFrame(drawRays);
+}
+drawRays();
+
+const heroParticles = document.getElementById('heroParticles');
+for (let i = 0; i < 24; i++) {
+  const p = document.createElement('div');
+  p.className = 'p-dot';
+  const size = 2 + Math.random() * 5;
+  p.style.cssText = `
+    left:${Math.random()*100}%;
+    width:${size}px; height:${size}px;
+    background:${Math.random()>0.5?'rgba(0,198,80,0.45)':'rgba(12,59,125,0.35)'};
+    animation-duration:${8+Math.random()*14}s;
+    animation-delay:${Math.random()*8}s;
+    --drift:${(Math.random()-0.5)*120};
+  `;
+  heroParticles.appendChild(p);
+}
+
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 50) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+}, { passive: true });
+
+document.querySelectorAll('.service-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
+    const y = ((e.clientY - rect.top)  / rect.height * 100).toFixed(1);
+    card.style.setProperty('--mx', x + '%');
+    card.style.setProperty('--my', y + '%');
+  });
+});
+
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+function startCountUp(el, target, duration = 1800) {
+  let start = 0;
+  const step = target / (duration / 16);
+  const timer = setInterval(() => {
+    start += step;
+    if (start >= target) { el.textContent = target; clearInterval(timer); }
+    else el.textContent = Math.floor(start);
+  }, 16);
+}
+const countObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.count-up, .count-band').forEach(el => {
+        startCountUp(el, parseInt(el.getAttribute('data-target')));
+      });
+      countObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.hero-stats, .stats-band').forEach(el => countObs.observe(el));
+
+(function initProcess() {
+  const track = document.getElementById('processTrack');
+  const texts = document.querySelectorAll('.process-step');
+  const svgs  = document.querySelectorAll('.solar-svg');
+  const dots  = document.querySelectorAll('#stepDots .step-dot');
+  if (!track) return;
+  const totalSteps = texts.length;
+  function update() {
+    const rect = track.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const totalScroll = rect.height - vh;
+    const scrolled = -rect.top;
+    const progress = Math.max(0, Math.min(1, scrolled / totalScroll));
+    let idx = Math.round(progress * (totalSteps - 1));
+    texts.forEach((el, i) => el.classList.toggle('active', i === idx));
+    svgs.forEach((el, i)  => el.classList.toggle('active', i === idx));
+    dots.forEach((el, i)  => el.classList.toggle('active', i === idx));
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+
+function switchCalcTab(panel, btn) {
+  document.querySelectorAll('.calc-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-' + panel).classList.add('active');
+}
+function fmtPKR(n) { return 'PKR ' + Math.round(n).toLocaleString('en-PK'); }
+
+function calcOnGrid() {
+  const units = parseFloat(document.getElementById('og-units').value) || 0;
+  const size  = parseFloat(document.getElementById('og-size').value) || 0;
+  const rate  = parseFloat(document.getElementById('og-rate').value) || 45;
+  const sun   = parseFloat(document.getElementById('og-sun').value) || 5;
+  const meter = document.getElementById('og-meter').value;
+
+  if (!units || !size) { alert('Please enter your monthly units and system size.'); return; }
+
+  const solarGenMonthly = size * sun * 30 * 0.8;
+  const solarCovered    = Math.min(units, solarGenMonthly);
+  const exportUnits     = Math.max(0, solarGenMonthly - units);
+  const savedUnits      = solarCovered;
+  const monthlySavings  = savedUnits * rate;
+  const exportIncome    = meter === 'yes' ? exportUnits * rate * 0.5 : 0;
+  const totalMonthly    = monthlySavings + exportIncome;
+  const yearly          = totalMonthly * 12;
+  const systemCost      = size * 110000;
+  const payback         = systemCost / yearly;
+
+  const el = document.getElementById('og-result');
+  el.className = 'calc-result-card show';
+  el.innerHTML = `
+    <div style="color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:16px;color:var(--accent);">📊 On-Grid Savings Estimate</div>
+    <div class="calc-result-grid">
+      <div class="calc-result-item"><span class="val">${Math.round(solarGenMonthly).toLocaleString()} kWh</span><span class="lbl">Solar Generated / Month</span></div>
+      <div class="calc-result-item"><span class="val">${Math.round(savedUnits).toLocaleString()} kWh</span><span class="lbl">Units Saved from Grid</span></div>
+      <div class="calc-result-item"><span class="val">${fmtPKR(monthlySavings)}</span><span class="lbl">Monthly Bill Savings</span></div>
+      <div class="calc-result-item"><span class="val">${fmtPKR(exportIncome)}</span><span class="lbl">Net Metering Income</span></div>
+    </div>
+    <div class="calc-result-highlight">
+      <div class="big-val">${fmtPKR(yearly)}</div>
+      <div class="big-lbl">Estimated Yearly Benefit</div>
+    </div>
+    <div style="margin-top:14px;padding:14px;background:rgba(255,255,255,0.06);border-radius:10px;font-size:0.82rem;color:rgba(255,255,255,0.6);">
+      💡 Estimated Payback Period: <strong style="color:#fff;">${payback.toFixed(1)} years</strong> &nbsp;|&nbsp; 25-year system life
+    </div>
+  `;
+}
+
+function calcHybrid() {
+  const units    = parseFloat(document.getElementById('hy-units').value) || 0;
+  const rate     = parseFloat(document.getElementById('hy-rate').value) || 45;
+  const size     = parseFloat(document.getElementById('hy-size').value) || 0;
+  const battery  = parseFloat(document.getElementById('hy-battery').value) || 0;
+  const loadshed = parseFloat(document.getElementById('hy-loadshed').value) || 4;
+  const fuel     = parseFloat(document.getElementById('hy-fuel').value) || 0;
+
+  if (!units || !size) { alert('Please enter your monthly units and system size.'); return; }
+
+  const solarGenMonthly = size * 5 * 30 * 0.8;
+  const solarCovered    = Math.min(units, solarGenMonthly);
+  const monthlySavings  = solarCovered * rate;
+  const fuelSavings     = fuel * 30;
+  const batteryValue    = battery * rate * 2;
+  const totalMonthly    = monthlySavings + fuelSavings + batteryValue * 0.5;
+  const yearly          = totalMonthly * 12;
+  const systemCost      = size * 130000 + battery * 18000;
+  const payback         = systemCost / yearly;
+
+  const el = document.getElementById('hy-result');
+  el.className = 'calc-result-card show';
+  el.innerHTML = `
+    <div style="color:var(--accent);font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:16px;">🔋 Hybrid System Savings Estimate</div>
+    <div class="calc-result-grid">
+      <div class="calc-result-item"><span class="val">${Math.round(solarGenMonthly).toLocaleString()} kWh</span><span class="lbl">Solar Generated / Month</span></div>
+      <div class="calc-result-item"><span class="val">${Math.round(loadshed)}h/day</span><span class="lbl">Load Shedding Covered</span></div>
+      <div class="calc-result-item"><span class="val">${fmtPKR(monthlySavings)}</span><span class="lbl">Bill Savings</span></div>
+      <div class="calc-result-item"><span class="val">${fmtPKR(fuelSavings)}</span><span class="lbl">Generator Fuel Saved</span></div>
+    </div>
+    <div class="calc-result-highlight">
+      <div class="big-val">${fmtPKR(yearly)}</div>
+      <div class="big-lbl">Estimated Total Yearly Benefit</div>
+    </div>
+    <div style="margin-top:14px;padding:14px;background:rgba(255,255,255,0.06);border-radius:10px;font-size:0.82rem;color:rgba(255,255,255,0.6);">
+      💡 Estimated Payback: <strong style="color:#fff;">${payback.toFixed(1)} years</strong> &nbsp;|&nbsp; Includes battery backup value
+    </div>
+  `;
+}
+
+function filterPortfolio(cat, btn) {
+  document.querySelectorAll('.pf-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.portfolio-card').forEach(card => {
+    card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+  });
+}
+
+function openOverlay(id) {
+  const el = document.getElementById(id);
+  el.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeOverlay(id) {
+  const el = document.getElementById(id);
+  el.classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeOverlay('projectOverlay');
+});
+
+const projects = {
+  khanpur: {
+    title: '10kW Hybrid Residential System',
+    location: 'Khanpur Site',
+    type: 'Hybrid',
+    emoji: '☀️',
+    bg: 'linear-gradient(135deg,#071e40,#0C3B7D)',
+    images: ['assets/projects/khanpur-1.jpg','assets/projects/khanpur-2.jpg','assets/projects/khanpur-3.jpg'],
+    tagline: 'We Engineer Advanced Dual-Configuration Energy Solutions for Maximum Reliability',
+    intro: 'At GlowGrid Technologies, we combined on-grid efficiency with intelligent hybrid backup to deliver a high-performance 10kW + 6kW dual solar energy system tailored for the Khanpur site.',
+    strategic: 'Our approach integrated Growatt 10kW on-grid technology with Itel 6kW hybrid inverter and lithium battery storage, combined with premium-grade mounting infrastructure and comprehensive safety systems.',
+    reliability: 'The system was engineered with precision, prioritizing energy autonomy and operational continuity.',
+    performance: 'From TOMZN AC/DC breakers and surge protection to XLPO double-insulated DC cabling and Newage AC wiring, the entire system was tuned for safe, efficient generation.',
+    features: [
+      { icon: 'fa-solar-panel', title: 'Dual Inverter Technology', desc: '10kW On-Grid + 6kW Hybrid' },
+      { icon: 'fa-battery-full', title: 'Long-Life Battery Storage', desc: '5.12kWh, 6,000-cycle life' },
+      { icon: 'fa-shield-alt', title: 'Premium Safety Components', desc: 'TOMZN AC/DC breakers + SPD' },
+      { icon: 'fa-tools', title: 'SS-Grade Mounting Structure', desc: '14-gauge standard, stainless steel' },
+    ],
+    specs: [
+      ['On-Grid Inverter', 'Growatt 10kW (10-year warranty)'],
+      ['Hybrid Inverter', 'Itel 6kW (5-year warranty)'],
+      ['Battery Storage', 'Lithium 5.12 kWh (51.2V / 100Ah)'],
+      ['Battery Cycles', 'Up to 6,000 cycles']
+    ]
+  },
+  bahria: {
+    title: '10kW Hybrid Residential System',
+    location: 'Bahria Town Phase 8 Defence Villas',
+    type: 'Hybrid',
+    emoji: '🏠',
+    bg: 'linear-gradient(135deg,#0a2c5a,#1a4fa8)',
+    images: ['assets/projects/bahria-1.jpg','assets/projects/bahria-2.jpg','assets/projects/bahria-3.jpg'],
+    tagline: 'We Engineer Advanced Hybrid Energy Solutions for Premium Residences',
+    intro: 'At Glowgrid Technologies, we combined on-grid efficiency with battery backup technology to deliver a sophisticated 10kW hybrid energy system.',
+    strategic: 'Integrated Growatt 10kW on-grid inverter with 8kW Nitrox hybrid inverter and Dongjin battery storage.',
+    reliability: 'The system prioritizes energy flexibility and power security for modern residential use.',
+    performance: 'WiFi-enabled monitoring with seamless day/night energy handling.',
+    features: [
+      { icon: 'fa-solar-panel', title: 'Dual Inverter Configuration', desc: 'Growatt 10kW + Nitrox 8kW' },
+      { icon: 'fa-battery-full', title: 'Battery Backup System', desc: 'Dongjin 5.12kWh with WiFi' },
+      { icon: 'fa-wifi', title: 'WiFi Energy Monitoring', desc: 'Real-time remote monitoring' },
+      { icon: 'fa-certificate', title: '10-Year Warranty Coverage', desc: 'Growatt manufacturer warranty' },
+    ],
+    specs: [
+      ['On-Grid Inverter', 'Growatt 10kW (10-year warranty)'],
+      ['Hybrid Inverter', 'Nitrox 8kW'],
+      ['Solar Panels', '25x Longi X6 Premium'],
+      ['Battery Storage', 'Dongjin 5.12kWh with WiFi module']
+    ]
+  },
+  pwd: {
+    title: '15kW Government On-Grid System (PWD)',
+    location: 'PWD, Islamabad',
+    type: 'Government',
+    emoji: '🏛️',
+    bg: 'linear-gradient(135deg,#003d2a,#0f766e)',
+    images: ['assets/projects/pwd-1.jpg','assets/projects/pwd-2.jpg','assets/projects/pwd-3.jpg'],
+    tagline: 'We Deliver Reliable Energy Solutions for Government Infrastructure',
+    intro: 'Institutional-grade 15kW on-grid system tailored for government operations at PWD, Islamabad.',
+    strategic: 'Fox 25kW inverter, Aiko N-type bifacial panels, and Mughal steel mounting structure.',
+    reliability: 'Built for continuity, low maintenance, and dependable output.',
+    performance: 'Calibrated for long-term public-sector use.',
+    features: [
+      { icon: 'fa-star', title: 'Institutional-Grade Performance', desc: 'Designed for 24/7 operations' },
+      { icon: 'fa-solar-panel', title: 'Advanced ABC Panel Technology', desc: '24 Aiko N-type bifacial panels' },
+      { icon: 'fa-plug', title: 'Fox Inverter Technology', desc: 'Fox 25kW commercial inverter' },
+      { icon: 'fa-building', title: 'Government-Spec Structure', desc: 'Mughal steel mounting' },
+    ],
+    specs: [
+      ['System Type', 'On-Grid (Grid-Synchronized)'],
+      ['Inverter', 'Fox 25kW Commercial'],
+      ['Solar Panels', '24x Aiko N-type Bifacial ABC']
+    ]
+  },
+  askari: {
+    title: '15kW Residential On-Grid System',
+    location: 'Askari 7, Rawalpindi',
+    type: 'Residential',
+    emoji: '⚡',
+    bg: 'linear-gradient(135deg,#1a3a5c,#2d6a9f)',
+    images: ['assets/projects/askari-1.jpg','assets/projects/askari-2.jpg','assets/projects/askari-3.jpg'],
+    tagline: 'We Build Efficient Energy Solutions for Modern Residences',
+    intro: 'A responsive, user-focused 15kW on-grid energy system for residential demand.',
+    strategic: 'Growatt inverter + JA N-type bifacial panels + durable mounting.',
+    reliability: 'Space-optimized layout and stable energy output.',
+    performance: 'Net-metering-ready installation with high daily yield.',
+    features: [
+      { icon: 'fa-home', title: 'Residential-Scale Efficiency', desc: 'Optimized for household loads' },
+      { icon: 'fa-solar-panel', title: 'Bifacial Technology', desc: '25x JA N-type bifacial panels' },
+      { icon: 'fa-cog', title: 'Growatt Reliability', desc: '15kW Growatt inverter' },
+      { icon: 'fa-cloud-sun', title: 'Weather-Resistant Structure', desc: 'Mughal steel high-rise mounting' },
+    ],
+    specs: [
+      ['System Type', 'On-Grid (Net Metering Ready)'],
+      ['Inverter', 'Growatt 15kW'],
+      ['Solar Panels', '25x JA N-type Bifacial']
+    ]
+  },
+  jarar: {
+    title: '50kW Commercial On-Grid System',
+    location: 'Jarar Camp Scheme-1, Rawalpindi',
+    type: 'Commercial',
+    emoji: '🏢',
+    bg: 'linear-gradient(135deg,#3d1a00,#b45309)',
+    images: ['assets/projects/jarar-1.jpg','assets/projects/jarar-2.jpg','assets/projects/jarar-3.jpg'],
+    tagline: 'We Deliver High-Capacity Energy Solutions for Commercial Operations',
+    intro: 'Robust 50kW on-grid system tailored for commercial infrastructure.',
+    strategic: 'Knox inverter technology with Canadian N-type bifacial panels.',
+    reliability: 'Designed for maximum uptime and strong monthly yield.',
+    performance: 'Fast, secure, dynamic energy generation across business loads.',
+    features: [
+      { icon: 'fa-bolt', title: 'High-Capacity Output (50kW)', desc: 'Supports full commercial load' },
+      { icon: 'fa-plug', title: 'Premium Knox Inverter', desc: 'Knox 50kW commercial-grade' },
+      { icon: 'fa-solar-panel', title: 'Bifacial Technology', desc: '62x Canadian N-type bifacial' },
+      { icon: 'fa-industry', title: 'Industrial-Grade Structure', desc: 'Mughal steel mounting system' },
+    ],
+    specs: [
+      ['System Type', 'On-Grid Commercial'],
+      ['Inverter', 'Knox 50kW Premium'],
+      ['Solar Panels', '62x Canadian N-type Bifacial']
+    ]
+  },
+  taxila: {
+    title: '202kW Grid-Tied Solar System',
+    location: 'Taxila',
+    type: 'Commercial',
+    emoji: '🌐',
+    bg: 'linear-gradient(135deg,#1a0a3d,#6d28d9)',
+    images: ['assets/projects/taxila-1.jpg','assets/projects/taxila-2.jpg','assets/projects/taxila-3.jpg'],
+    tagline: '202kW Grid-Tied Solar Energy System Installed in Taxila',
+    intro: 'Large-scale commercial installation showcasing GlowGrid utility-scale execution capability.',
+    strategic: 'Scalable system architecture for stable, high-output performance.',
+    reliability: 'Commercial-grade components and robust electrical design.',
+    performance: 'Full grid-tie synchronization and remote monitoring support.',
+    features: [
+      { icon: 'fa-bolt', title: '202kW Installed Capacity', desc: 'Large-scale commercial system' },
+      { icon: 'fa-network-wired', title: 'Grid-Tied Architecture', desc: 'Full NEPRA grid compliance' },
+      { icon: 'fa-chart-line', title: 'Remote Monitoring', desc: 'Real-time performance tracking' },
+      { icon: 'fa-industry', title: 'Industrial-Grade Build', desc: 'Commercial mounting & wiring' },
+    ],
+    specs: [
+      ['System Capacity', '202kW DC'],
+      ['System Type', 'Grid-Tied'],
+      ['Location', 'Taxila, Pakistan']
+    ]
+  }
+};
+
+function openProject(id) {
+  const p = projects[id];
+  if (!p) return;
+  const body = document.getElementById('projectOverlayBody');
+  body.innerHTML = `
+    <div style="height:260px;background:${p.bg};display:flex;align-items:center;justify-content:center;font-size:5rem;">${p.emoji}</div>
+    <div class="overlay-body">
+      <div class="overlay-cat-tag"><i class="fas fa-solar-panel"></i> ${p.type} Project</div>
+      <h2 class="overlay-title">${p.title}</h2>
+      <div class="overlay-meta">
+        <span><i class="fas fa-map-marker-alt"></i> ${p.location}</span>
+        <span><i class="fas fa-hard-hat"></i> GlowGrid Technologies</span>
+        <span><i class="fas fa-certificate"></i> Completed Project</span>
+      </div>
+
+      <p class="overlay-para" style="font-size:1.05rem;font-weight:500;color:var(--primary);">${p.tagline}</p>
+      <p class="overlay-para">${p.intro}</p>
+
+      ${p.images?.length ? `
+      <h3 class="overlay-section-title">Project Gallery</h3>
+      <div class="project-gallery">
+        ${p.images.map(src => `<img src="${src}" alt="${p.title}">`).join('')}
+      </div>
+      ` : ''}
+
+      <h3 class="overlay-section-title">Strategic Implementation</h3>
+      <p class="overlay-para">${p.strategic}</p>
+      <h3 class="overlay-section-title">Design & Reliability</h3>
+      <p class="overlay-para">${p.reliability}</p>
+      <h3 class="overlay-section-title">Performance & Safety</h3>
+      <p class="overlay-para">${p.performance}</p>
+
+      <h3 class="overlay-section-title">System Features</h3>
+      <div class="overlay-features-grid">
+        ${p.features.map(f => `
+          <div class="overlay-feature-item">
+            <i class="fas ${f.icon}"></i>
+            <div><h6>${f.title}</h6><p>${f.desc}</p></div>
+          </div>`).join('')}
+      </div>
+
+      <h3 class="overlay-section-title">Technical Specifications</h3>
+      <table class="overlay-specs-table">
+        ${p.specs.map(s => `<tr><td>${s[0]}</td><td>${s[1]}</td></tr>`).join('')}
+      </table>
+
+      <div class="overlay-cta">
+        <h5>Interested in a Similar System?</h5>
+        <p>Get a free consultation and site survey for your property in Rawalpindi or Islamabad.</p>
+        <a href="tel:+923040552302"><i class="fas fa-phone"></i> Call for Free Quote</a>
+      </div>
+    </div>
+  `;
+  openOverlay('projectOverlay');
+}
+</script>
+
+<script>
+// Hamburger menu
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+if (hamburger && mobileMenu) {
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.contains('open');
+    mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', !isOpen);
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  });
+
+  // Close on mobile link click
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Close on outside click
+  mobileMenu.addEventListener('click', (e) => {
+    if (e.target === mobileMenu) {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+  });
+}
+</script>
+</body>
+</html>
